@@ -7,16 +7,19 @@
 <h2>Product Table</h2>
 
 <div>
-    <form method="post" action="@Url.Action("ProductTable","Products")">
-        <input id="searchText" name="SearchText" />
-        <button type="button" id="btnSearch">Search</button>
+    <form method="post" @*action="@Url.Action("ProductTable","Products")"*@>
+        <div class="form-group">
+            <input id="searchText" name="SearchText" class="form-control" />
+            <button type="button" id="btnSearch">Search</button>
+            <button type="button" id="btnNew">New</button>
+        </div>
     </form>
-    <button type="button" id="btnNew">New</button>
+    @*<button type="button" id="btnNew">New</button>*@
 </div>
 <br />
 
 <div>
-    <table class="table table-bordered">
+    <table class="table table-bordered table-striped">
         <thead>
             <tr>
                 <th>Product Name</th>
@@ -31,7 +34,16 @@
             {
                 <tr>
                     <td>@product.Name</td>
-                    <td>--</td>
+                    <td>
+                        @if (product.Category != null) 
+                        { 
+                            <text>@product.Category.Name</text>
+                        }
+                        else
+                        {
+                            <text>-</text>
+                        }
+                    </td>
                     <td>@product.Description</td>
                     <td>@product.Price</td>
 

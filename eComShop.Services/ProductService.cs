@@ -2,6 +2,7 @@
 using eComShop.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,13 +13,13 @@ namespace eComShop.Services
     {
         public List<Product> GetAllProducts()
         {
-            var context = new ShopDbContext();
-            return context.Products.ToList();
+            //var context = new ShopDbContext();
+            //return context.Products.ToList();
 
-            //using (var context = new ShopDbContext())
-            //{
-            //    return context.Products.ToList();
-            //}
+            using (var context = new ShopDbContext())
+            {
+                return context.Products.Include(x=> x.Category).ToList();
+            }
         }
 
         public Product GetProduct(int id)
@@ -34,6 +35,8 @@ namespace eComShop.Services
         {
             using (var context = new ShopDbContext())
             {
+                context.Entry(product.Category).State = System.Data.Entity.EntityState.Unchanged;
+
                 context.Products.Add(product);
                 context.SaveChanges();
             }

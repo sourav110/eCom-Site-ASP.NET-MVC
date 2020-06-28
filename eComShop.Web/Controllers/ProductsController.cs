@@ -1,5 +1,6 @@
 ﻿using eComShop.Entities;
 using eComShop.Services;
+using eComShop.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -39,8 +40,14 @@ namespace eComShop.Web.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(Product product)
+        public ActionResult Create(NewCategoryViewModel model)
         {
+            Product product = new Product();
+            product.Name = model.Name;
+            product.Description = model.Description;
+            product.Price = model.Price;
+            product.Category = categoryService.GetCategory(model.CategoryId);
+
             productService.SaveProduct(product);
             return RedirectToAction("ProductTable");
         }

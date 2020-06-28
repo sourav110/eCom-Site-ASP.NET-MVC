@@ -1,0 +1,30 @@
+﻿@model List<eComShop.Entities.Category>
+
+@{ 
+    ViewBag.Title = "Index"; 
+}
+
+<h2>Index - All Catgories(<a href="@Url.Action("Create", "Categories")">Create New</a>)</h2>
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var category in Model)
+        {
+            <tr>
+                <td>@category.Name</td>
+                <td>@category.Description</td>
+                <td>
+                    <a class="btn btn-primary" href="@Url.Action("Edit", "Categories", new { id = category.Id})">Edit</a>
+                    <a class="btn btn-danger" href="@Url.Action("Delete", "Categories", new { id = category.Id})">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+

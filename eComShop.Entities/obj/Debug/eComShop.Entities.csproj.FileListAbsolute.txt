@@ -1,0 +1,6 @@
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Entities\bin\Debug\eComShop.Entities.dll
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Entities\bin\Debug\eComShop.Entities.pdb
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Entities\obj\Debug\eComShop.Entities.csproj.CoreCompileInputs.cache
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Entities\obj\Debug\eComShop.Entities.dll
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Entities\obj\Debug\eComShop.Entities.pdb
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Entities\obj\Debug\eComShop.Entities.csprojAssemblyReference.cache

@@ -1,0 +1,127 @@
+﻿@model List<eComShop.Entities.Product>
+
+@{ 
+    ViewBag.Title = "ProductTable"; 
+}
+
+<h2>Product Table</h2>
+
+<div>
+    <form method="post" action="@Url.Action("ProductTable","Products")">
+        <input id="searchText" name="SearchText" />
+        <button type="button" id="btnSearch">Search</button>
+    </form>
+    <button type="button" id="btnNew">New</button>
+</div>
+<br />
+
+<div>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Category</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>--</td>
+                    <td>@product.Description</td>
+                    <td>@product.Price</td>
+
+                    <td>
+                        @*<a class="btn btn-primary" href="@Url.Action("Edit", "Products", new { id = product.Id})">Edit</a>
+                        <a class="btn btn-danger" href="@Url.Action("Delete", "Products", new { id = product.Id})">Delete</a>*@
+                        <button class="btnEdit" type="button" data-id ="@product.Id">Edit</button>
+                        <button class="btnDelete" type="button" data-id ="@product.Id">Delete</button>
+                    </td>
+                </tr>            
+             }
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    $("#btnSearch").click(function () {
+        var searchValue = $("#searchText").val();
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("ProductTable", "Products")',
+            data: {
+                searchText: searchValue
+            }
+        }).done(function (response) {
+            $("#tableContainer").html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+
+
+    $("#btnNew").click(function () {
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("Create", "Products")',
+        }).done(function (response) {
+            $("#actionContainer").html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+
+
+    $(".btnEdit").click(function () {
+        $.ajax({
+            url: '@Url.Action("Edit", "Products")',
+            data: {
+                Id : $(this).attr('data-id')
+            }
+        }).done(function (response) {
+            $("#actionContainer").html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Failed");
+        });
+    });
+
+
+    $(".btnDelete").click(function () {
+
+        var confirmDelete = confirm("Are you sure to want to delete?");
+        if (confirmDelete) {
+
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Delete", "Products")',
+                data: {
+                    Id : $(this).attr('data-id')
+                }
+            }).done(function (response) {
+                $("#tableContainer").html(response);
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                alert("Failed");
+            });
+
+        }
+
+    });
+</script>
+
+
+
+
+
+
+
+
+
+
+
+

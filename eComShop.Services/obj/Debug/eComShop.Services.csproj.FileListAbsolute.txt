@@ -1,0 +1,17 @@
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\eComShop.Services.dll.config
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\eComShop.Services.dll
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\eComShop.Services.pdb
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\EntityFramework.dll
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\EntityFramework.SqlServer.dll
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\EntityFramework.xml
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\EntityFramework.SqlServer.xml
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\obj\Debug\eComShop.Services.csprojAssemblyReference.cache
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\obj\Debug\eComShop.Services.csproj.CoreCompileInputs.cache
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\obj\Debug\eComShop.Services.csproj.CopyComplete
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\obj\Debug\eComShop.Services.dll
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\obj\Debug\eComShop.Services.pdb
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\eComShop.Database.dll
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\eComShop.Entities.dll
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\eComShop.Database.pdb
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\eComShop.Database.dll.config
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Services\bin\Debug\eComShop.Entities.pdb

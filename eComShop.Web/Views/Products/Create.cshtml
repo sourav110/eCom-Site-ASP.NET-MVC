@@ -1,0 +1,51 @@
+﻿@model List<eComShop.Entities.Category>
+
+@{ 
+    ViewBag.Title = "Create"; 
+}
+
+<h2>Create Product</h2>
+
+<form id="createProduct">
+    <label>Category</label>
+    <select name="Category">
+        <option value="0">Select Category</option> 
+        @foreach(var category in Model)
+        {
+            <option value="@category.Id">@category.Name</option>
+        }
+    </select>
+    <br />
+
+    <label>Name</label>
+    <input name="Name" />
+    <br />
+
+    <label>Description</label>
+    <input name="Description" />
+    <br />
+
+    <label>Price</label>
+    <input name="Price" />
+    <br />
+
+    <button id="btnSave" type="button">Save</button>
+</form>
+
+
+<script>
+    $("#btnSave").click(function () {
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Create", "Products")',
+            data: $("#createProduct").serialize()
+
+        }).done(function (response) {
+            $("#tableContainer").html(response);
+            $("#actionContainer").html("");
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Failed");
+        });
+    });
+</script>

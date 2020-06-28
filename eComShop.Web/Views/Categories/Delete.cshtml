@@ -1,0 +1,17 @@
+﻿@model eComShop.Entities.Category
+
+@{ 
+    ViewBag.Title = "Delete"; 
+}
+
+<h2>Delete Category</h2>
+
+<h3>Are you sure you want to delete this category?</h3>
+
+<form method="post">
+    <input name="Id" value="@Model.Id" hidden />
+
+    <button type="submit" class="btn btn-danger">Yes</button>
+    <a href="@Url.Action("Index","Categories")" class="btn btn-warning">Cancel</a>
+</form>
+

@@ -1,0 +1,60 @@
+﻿
+@{ 
+    ViewBag.Title = "Create"; 
+}
+
+<h2>Create Category</h2>
+
+<form method="post">
+    <label>Name</label>
+    <input name="Name" />
+    <br />
+
+    <label>Description</label>
+    <input name="Description" />
+    <br />
+
+    <label>Image</label>
+    <input name="ImageURL" id="imageUrl"  type="hidden"/>
+    <input name="Image" id="imageUpload" type="file" accept=".png, .jpg"/>
+    
+    <div class="thumb">
+        @*<img src="~/Content/images/image-box/imgbox-1-375x240.jpg" alt="image" />*@
+        <img id="categoryImage" />
+    </div>
+    <br />
+
+    <button type="submit">Save</button>
+</form>
+
+<script>
+    $("#imageUpload").change(function () {
+        var element = this; //this is imageUpload
+
+        var formData = new FormData();
+
+        var totalFiles = element.files.length;
+
+        for (var i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("UploadImage", "Shared")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false
+
+        }).done(function (response) {
+            if (response.Success) {
+                $("#imageUrl").val(response.ImageURL); 
+                $("#categoryImage").attr("src", response.ImageURL); 
+            }
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Failed");
+        });
+    });
+</script>

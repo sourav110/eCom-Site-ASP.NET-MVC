@@ -277,6 +277,7 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\maps\map_icon.png" />
     <Content Include="Content\images\mega-menu\1.jpg" />
+    <Content Include="Content\images\noimage.jpg" />
     <Content Include="Content\images\parallax\bg-parallax1.jpg" />
     <Content Include="Content\images\parallax\bg-parallax2.jpg" />
     <Content Include="Content\images\parallax\bg-parallax3.jpg" />

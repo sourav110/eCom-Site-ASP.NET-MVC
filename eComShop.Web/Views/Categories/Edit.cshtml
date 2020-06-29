@@ -5,33 +5,53 @@
 
     var trueChecked = Model.IsFeatured ? "checked" : string.Empty;
     var falseChecked = !Model.IsFeatured ? "checked" : string.Empty;
+
+    var imageUrl = !string.IsNullOrEmpty(Model.ImageURL) ? Model.ImageURL : "/content/images/noimage.jpg";
 }
 
-<h2 class="text-info">Edit Category</h2>
+<br />
+    <div class="container">
+        <h2 class="text-info">Edit Category</h2>
 
-<form method="post">
-    <input name="Id" value="@Model.Id" hidden />
 
-    <label>Name</label>
-    <input name="Name" value="@Model.Name" />
-    <br />
+        <form method="post">
+            <input name="Id" value="@Model.Id" hidden />
 
-    <label>Description</label>
-    <input name="Description" value="@Model.Description" />
-    <br />
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input class="form-control" name="Name" value="@Model.Name" />
+                    </div>
 
-    <label>Image</label>
-    <input name="ImageURL" id="imageUrl" type="hidden" />
-    <input name="Image" id="imageUpload" type="file" accept=".png, .jpg" />
-    <br />
+                    <div class="form-group">
+                        <label>Description</label>
+                        <input class="form-control" name="Description" value="@Model.Description" />
+                    </div>
 
-    <label>Is Featured?</label>
-    <input name="IsFeatured" type="radio" value="True" @trueChecked /> True
-    <input name="IsFeatured" type="radio" value="False" @falseChecked /> False
-    <br />
+                    <div class="form-group">
+                        <label>Image</label>
+                        <input name="ImageURL" id="imageUrl" type="hidden" value="@Model.ImageURL" />
+                        <input class="form-control" name="Image" id="imageUpload" type="file" accept=".png, .jpg" />
+                    </div>
 
-    <button type="submit">Save</button>
-</form>
+                    <div class="form-group">
+                        <label>Is Featured?</label>
+                        <input name="IsFeatured" type="radio" value="True" @trueChecked /> True
+                        <input name="IsFeatured" type="radio" value="False" @falseChecked /> False
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="thumb">
+                        <img src="@imageUrl" class="img-thumbnail img-fluid" id="categoryImage" />
+                    </div>
+                </div>
+
+                <button type="submit">Update</button>
+            </div>
+        </form>
+    </div>
 
 <script>
     $("#imageUpload").change(function () {

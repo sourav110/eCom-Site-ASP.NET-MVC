@@ -84,6 +84,8 @@
             url: '@Url.Action("Create", "Products")',
         }).done(function (response) {
             $("#actionContainer").html(response);
+            focusAction();
+
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Fail");
         });
@@ -98,6 +100,8 @@
             }
         }).done(function (response) {
             $("#actionContainer").html(response);
+            focusAction();
+
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Failed");
         });
@@ -124,6 +128,12 @@
         }
 
     });
+
+    function focusAction() {
+        $('html, body').animate({
+            scrollTop: $("#actionContainer").offset().top - 100
+        }, 1000);
+    }
 </script>
 
 

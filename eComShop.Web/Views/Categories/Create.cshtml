@@ -3,33 +3,48 @@
     ViewBag.Title = "Create"; 
 }
 
-<h2 class="text-info">Create Category</h2>
+    <div class="container">
+        <h2 class="text-info">Create Category</h2>
 
-<form method="post">
-    <label>Name</label>
-    <input name="Name" />
-    <br />
 
-    <label>Description</label>
-    <input name="Description" />
-    <br />
+            <form method="post">
 
-    <label>Image</label>
-    <input name="ImageURL" id="imageUrl" type="hidden" />
-    <input name="Image" id="imageUpload" type="file" accept=".png, .jpg" />
+                <div class="row">
+                    <div class="col-md-8">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input name="Name" class="form-control" />
+                        </div>
 
-    <div class="thumb">
-        <img id="categoryImage" />
+                        <div class="form-group">
+                            <label>Description</label>
+                            <input name="Description" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Image</label>
+                            <input name="ImageURL" id="imageUrl" type="hidden" />
+                            <input name="Image" id="imageUpload" type="file" accept=".png, .jpg" class="form-control" />
+                        </div>
+
+                        <div class="form-group">
+                            <label>Is Featured?</label>
+                            <input name="IsFeatured" type="radio" value="True" /> True
+                            <input name="IsFeatured" type="radio" value="False" /> False
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="thumb">
+                            <img src="ImageURL" class="img-thumbnail img-fluid" id="categoryImage" />
+                        </div>
+                    </div>
+
+                    <button type="submit">Save</button>
+                </div>
+            </form>
+ 
     </div>
-    <br />
-
-    <label>Is Featured?</label>
-    <input name="IsFeatured" type="radio" value="True"/> True
-    <input name="IsFeatured" type="radio" value="False"/> False
-    <br />
-
-    <button type="submit">Save</button>
-</form>
 
 <script>
     $("#imageUpload").change(function () {

@@ -15,13 +15,17 @@
     <br />
 
     <label>Image</label>
-    <input name="ImageURL" id="imageUrl"  type="hidden"/>
-    <input name="Image" id="imageUpload" type="file" accept=".png, .jpg"/>
-    
+    <input name="ImageURL" id="imageUrl" type="hidden" />
+    <input name="Image" id="imageUpload" type="file" accept=".png, .jpg" />
+
     <div class="thumb">
-        @*<img src="~/Content/images/image-box/imgbox-1-375x240.jpg" alt="image" />*@
         <img id="categoryImage" />
     </div>
+    <br />
+
+    <label>Is Featured?</label>
+    <input name="IsFeatured" type="radio" value="True"/> True
+    <input name="IsFeatured" type="radio" value="False"/> False
     <br />
 
     <button type="submit">Save</button>

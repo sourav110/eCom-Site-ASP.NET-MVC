@@ -1,7 +1,10 @@
 ﻿@model eComShop.Entities.Category
 
 @{ 
-    ViewBag.Title = "Edit"; 
+    ViewBag.Title = "Edit";
+
+    var trueChecked = Model.IsFeatured ? "checked" : string.Empty;
+    var falseChecked = !Model.IsFeatured ? "checked" : string.Empty;
 }
 
 <h2 class="text-info">Edit Category</h2>
@@ -17,6 +20,48 @@
     <input name="Description" value="@Model.Description" />
     <br />
 
+    <label>Image</label>
+    <input name="ImageURL" id="imageUrl" type="hidden" />
+    <input name="Image" id="imageUpload" type="file" accept=".png, .jpg" />
+    <br />
+
+    <label>Is Featured?</label>
+    <input name="IsFeatured" type="radio" value="True" @trueChecked /> True
+    <input name="IsFeatured" type="radio" value="False" @falseChecked /> False
+    <br />
+
     <button type="submit">Save</button>
 </form>
+
+<script>
+    $("#imageUpload").change(function () {
+        var element = this; //this is imageUpload
+
+        var formData = new FormData();
+
+        var totalFiles = element.files.length;
+
+        for (var i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("UploadImage", "Shared")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false
+
+        }).done(function (response) {
+            if (response.Success) {
+                $("#imageUrl").val(response.ImageURL);
+                $("#categoryImage").attr("src", response.ImageURL);
+            }
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Failed");
+        });
+    });
+</script>
 

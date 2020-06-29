@@ -18,6 +18,14 @@ namespace eComShop.Services
             }
         }
 
+        public List<Category> GetFeaturedCategories()
+        {
+            using (var context = new ShopDbContext())
+            {
+                return context.Categories.Where(x=> x.IsFeatured && x.ImageURL != null).ToList();
+            }
+        }
+
         public Category GetCategory(int id)
         {
             using (var context = new ShopDbContext())

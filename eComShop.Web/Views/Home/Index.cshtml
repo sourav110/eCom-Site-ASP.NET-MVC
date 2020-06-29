@@ -1,22 +1,26 @@
 ﻿@model eComShop.Web.ViewModels.HomeViewModel
 
-@{ 
+@{
     ViewBag.Title = "Homepage";
 
-    var firstCategory = Model.Categories.Where(cat=> cat.ImageURL != null).First();
+    //var firstCategory = Model.FeaturedCategories.Where(cat => cat.ImageURL != null).First();
+    var firstCategory = Model.FeaturedCategories[0];
+    var secondCategory = Model.FeaturedCategories[1];
+    var thirdCategory = Model.FeaturedCategories[2];
+    var fourthCategory = Model.FeaturedCategories[3]; 
 
 }
 
 <!-- SLIDER -->
-@*<div class="rev_slider_wrapper fullwidthbanner-container">
+<div class="rev_slider_wrapper fullwidthbanner-container">
     <div id="rev-slider1" class="rev_slider fullwidthabanner">
         <ul>
-             Slide 1 
+            Slide 1
             <li data-transition="random">
-                 Main Image 
+                Main Image
                 <img src="~/Content/images/slider/slider-bg-5.jpg" alt="" data-bgposition="center center" data-no-retina>
 
-                 Layers 
+                Layers
                 <div class="tp-caption tp-resizeme text-white font-weight-300"
                      data-x="['left','left','left','center']" data-hoffset="['0','0','0','0']"
                      data-y="['middle','middle','middle','middle']" data-voffset="['-93','-93','-93','-93']"
@@ -95,13 +99,13 @@
                     <a href="#" class="themesflat-button has-padding-36 bg-accent has-shadow"><span>SHOP NOW</span></a>
                 </div>
             </li>
-             /End Slide 1 
-             Slide 2 
+            /End Slide 1
+            Slide 2
             <li data-transition="random">
-                 Main Image 
+                Main Image
                 <img src="~/Content/images/slider/slider-bg-1.jpg" alt="" data-bgposition="center center" data-no-retina>
 
-                 Layers 
+                Layers
                 <div class="tp-caption tp-resizeme text-333 font-weight-400 text-right"
                      data-x="['right','right','right','center']" data-hoffset="['33','33','33','0']"
                      data-y="['middle','middle','middle','middle']" data-voffset="['-115','-115','-115','-115']"
@@ -180,13 +184,11 @@
                     <a href="#" class="themesflat-button bg-accent has-shadow"><span>BY NOW</span></a>
                 </div>
             </li>
-             /End Slide 2 
+            /End Slide 2
         </ul>
     </div>
-</div>*@
+</div>
 <!-- END SLIDER -->
-
-
 <!-- IMAGE BOX -->
 <section class="flat-row row-image-box">
     <div class="container">
@@ -195,13 +197,16 @@
                 <div class="flat-image-box style-1 data-effect div-h22 clearfix">
                     <div class="item data-effect-item">
                         <div class="inner">
-                            <div class="thumb">
-                                <img src="@firstCategory.ImageURL" alt="Image"> 
-                                <div class="elm-btn">
-                                    <a href="#" class="themesflat-button bg-white width-150">@firstCategory.Name</a>
+                            @if (firstCategory != null)
+                            {
+                                <div class="thumb">
+                                    <img src="@firstCategory.ImageURL" alt="Image">
+                                    <div class="elm-btn">
+                                        <a href="#" class="themesflat-button bg-white width-150">@firstCategory.Name</a>
+                                    </div>
+                                    <div class="overlay-effect bg-color-1"></div>
                                 </div>
-                                <div class="overlay-effect bg-color-1"></div>
-                            </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -210,13 +215,17 @@
                 <div class="flat-image-box style-1 row2 data-effect clearfix">
                     <div class="item data-effect-item">
                         <div class="inner">
-                            <div class="thumb">
-                                <img src="~/Content/images/image-box/imgbox-1-375x240.jpg" alt="Image">
-                                <div class="elm-btn">
-                                    <a href="#" class="themesflat-button bg-white width-150">For Kid’s</a>
+                            @if (thirdCategory != null)
+                            {
+                                <div class="thumb">
+                                    <img src="@thirdCategory.ImageURL" alt="Image">
+                                    <div class="elm-btn">
+                                        <a href="#" class="themesflat-button bg-white width-150">@thirdCategory.Name</a>
+                                    </div>
+                                    <div class="overlay-effect bg-color-1"></div>
                                 </div>
-                                <div class="overlay-effect bg-color-1"></div>
-                            </div>
+                            }
+
                         </div>
                     </div>
 
@@ -237,13 +246,17 @@
                 <div class="flat-image-box style-1 data-effect div-h20 clearfix">
                     <div class="item data-effect-item">
                         <div class="inner">
-                            <div class="thumb">
-                                <img src="~/Content/images/image-box/imgbox-2-375x500.jpg" alt="Image">
-                                <div class="elm-btn">
-                                    <a href="#" class="themesflat-button bg-white width-150">For woMen’s</a>
+                            @if (secondCategory != null)
+                            {
+                                <div class="thumb">
+                                    <img src="@secondCategory.ImageURL" alt="Image">
+                                    <div class="elm-btn">
+                                        <a href="#" class="themesflat-button bg-white width-150">@secondCategory.Name</a>
+                                    </div>
+                                    <div class="overlay-effect bg-color-1"></div>
                                 </div>
-                                <div class="overlay-effect bg-color-1"></div>
-                            </div>
+                            }
+
                         </div>
                     </div>
                 </div>

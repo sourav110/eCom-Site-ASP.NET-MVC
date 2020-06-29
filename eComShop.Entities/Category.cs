@@ -14,5 +14,6 @@ namespace eComShop.Entities
         public List<Product> Products { get; set; }
 
         public string ImageURL { get; set; } 
+        public bool IsFeatured { get; set; }
     }
 }

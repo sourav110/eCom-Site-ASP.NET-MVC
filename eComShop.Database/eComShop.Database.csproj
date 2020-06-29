@@ -63,6 +63,10 @@
     <Compile Include="Migrations\202006261119134_upimgUrl.designer.cs">
       <DependentUpon>202006261119134_upimgUrl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006290514540_ftr.cs" />
+    <Compile Include="Migrations\202006290514540_ftr.designer.cs">
+      <DependentUpon>202006290514540_ftr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -86,6 +90,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006261119134_upimgUrl.resx">
       <DependentUpon>202006261119134_upimgUrl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006290514540_ftr.resx">
+      <DependentUpon>202006290514540_ftr.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

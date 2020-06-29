@@ -16,3 +16,4 @@ D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Mig
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.csproj.GenerateResource.cache
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.imgUrladded.resources
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.upimgUrl.resources
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.ftr.resources

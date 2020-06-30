@@ -4,18 +4,27 @@
     ViewBag.Title = "ProductTable"; 
 }
 
-<h2>Product Table</h2>
+<h2 style="text-align:center">Product Table</h2>
+<br />
 
 <div>
     <form method="post" @*action="@Url.Action("ProductTable","Products")"*@>
         <div class="form-group">
-            <input id="searchText" name="SearchText" class="form-control" />
-            <button type="button" id="btnSearch">Search</button>
-            <button type="button" id="btnNew">New</button>
+            <div class="row">
+                <div class="col-md-9">
+                    <input id="searchText" name="SearchText" class="form-control" />
+                </div>
+                <div class="col-md-3">
+                    <button type="button" id="btnSearch">Search</button>
+                    <button type="button" id="btnNew">New</button>
+                </div>
+            </div>
         </div>
     </form>
 </div>
 <br />
+
+
 
 <div>
     <table class="table table-bordered table-striped">
@@ -110,7 +119,38 @@
 
     $(".btnDelete").click(function () {
 
-        var confirmDelete = confirm("Are you sure to want to delete?");
+        swal({
+            title: "Confirm?",
+            text: "Are you sure you want to delete this product?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((willDelete) => {
+            if (willDelete) {
+                
+
+                $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Delete", "Products")',
+                data: {
+                    Id : $(this).attr('data-id')
+                }
+
+                }).done(function (response) {
+                    $("#tableContainer").html(response);
+                    swal("Product Deleted Successfully!", {
+                        icon: "success",
+                    });
+
+                }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert("Failed");
+                });
+            } 
+        });
+
+
+        @*var confirmDelete = confirm("Are you sure to want to delete?");
         if (confirmDelete) {
 
             $.ajax({
@@ -125,7 +165,7 @@
                 alert("Failed");
             });
 
-        }
+        }*@
 
     });
 

@@ -54,6 +54,10 @@
         }).done(function (response) {
             $("#tableContainer").html(response);
             $("#actionContainer").html("");
+            swal("Product Saved Successfully!", {
+                icon: "success",
+            });
+
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Failed");
         });

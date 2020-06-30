@@ -39,6 +39,11 @@
         }).done(function (response) {
             $("#tableContainer").html(response);
             $("#actionContainer").html("");
+
+            swal("Product Updated Successfully!", {
+                icon: "success",
+            });
+
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Failed");
         });

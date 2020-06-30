@@ -464,6 +464,10 @@
     <Content Include="Content\stylesheets\shortcodes.css" />
     <Content Include="Content\stylesheets\style.css" />
     <Content Include="Content\stylesheets\woocommerce.css" />
+    <Content Include="Content\sweet-alert\sweetalert.min.js" />
+    <Content Include="Content\sweet-alert\sweetalert2.all.min.js" />
+    <Content Include="Content\sweet-alert\sweetalert2.min.css" />
+    <Content Include="Content\sweet-alert\sweetalert2.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />

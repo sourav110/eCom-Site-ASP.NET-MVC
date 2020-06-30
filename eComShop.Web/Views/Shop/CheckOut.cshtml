@@ -1,0 +1,48 @@
+﻿@model eComShop.Web.ViewModels.CheckoutViewModel
+
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    decimal totalBill = 0;
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="title-section">
+                <h2 class="title">
+                    Check Out
+                </h2>
+            </div>
+        </div>
+    </div>
+
+    @if (Model != null)
+        {
+            if (Model.CartProducts != null && Model.CartProducts.Count > 0)
+            {
+                <div>
+                    @foreach (var product in Model.CartProducts)
+                    {
+                        var productQuantity = Model.CartProductIds.Where(productId => productId == product.Id).Count();
+                        totalBill = totalBill + (productQuantity * product.Price);
+
+                        <div>
+                            Name: @product.Name - Price: @product.Price - Quantity: @productQuantity - Total Price @(product.Price * productQuantity)
+                        </div>
+                    }
+                </div>
+                <div>
+                    Total Bill : @Model.CartProducts.Sum(x => x.Price * Model.CartProductIds.Where(productId => productId == x.Id).Count());
+                    TotalBill : @totalBill
+                </div>
+            }
+            else
+            {
+                <div>
+                    No products in Cart !
+                </div>
+            }
+        }
+</div>

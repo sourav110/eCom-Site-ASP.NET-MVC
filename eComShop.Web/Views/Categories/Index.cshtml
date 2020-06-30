@@ -5,9 +5,17 @@
 }
 
     <div class="container">
-        <br />
-        <h2 class="title">Index - All Catgories(<a href="@Url.Action("Create", "Categories")">Create New</a>)</h2>
-        <br />
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-section">
+                    <h2 class="title">
+                        Index - All Catgories(<a href="@Url.Action("Create", "Categories")">Create New</a>)
+                    </h2>
+                </div>
+            </div>
+        </div>
+
         <table class="table table-bordered table-striped">
             <thead class="thead-inverse">
                 <tr>
@@ -26,7 +34,8 @@
             <a class="btn btn-primary" href="@Url.Action("Edit", "Categories", new { id = category.Id})">Edit</a>
             <a class="btn btn-danger" href="@Url.Action("Delete", "Categories", new { id = category.Id})">Delete</a>
         </td>
-    </tr>}
+    </tr>
+}
             </tbody>
         </table>
     </div>

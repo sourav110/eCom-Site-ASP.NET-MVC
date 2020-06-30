@@ -31,6 +31,15 @@ namespace eComShop.Services
             }
         }
 
+        public List<Product> GetCartProducts(List<int> ids)
+        {
+            using (var context = new ShopDbContext())
+            {
+                var products = context.Products.Where(product => ids.Contains(product.Id)).ToList();
+                return products;
+            }
+        }
+
         public void SaveProduct(Product product)
         {
             using (var context = new ShopDbContext())

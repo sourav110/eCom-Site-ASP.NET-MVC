@@ -1,11 +1,16 @@
 ﻿@model List<eComShop.Entities.Product>
 
-@{ 
-    ViewBag.Title = "ProductTable"; 
-}
+@{ ViewBag.Title = "ProductTable"; }
 
-<h2 style="text-align:center">Product Table</h2>
-<br />
+<div class="row">
+    <div class="col-md-12">
+        <div class="title-section">
+            <h2 class="title">
+                Product Table
+            </h2>
+        </div>
+    </div>
+</div>
 
 <div>
     <form method="post" @*action="@Url.Action("ProductTable","Products")"*@>
@@ -43,10 +48,9 @@
                 <tr>
                     <td>@product.Name</td>
                     <td>
-                        @if (product.Category != null) 
-                        { 
-                            <text>@product.Category.Name</text>
-                        }
+                        @if (product.Category != null)
+                        {
+                            <text>@product.Category.Name</text> }
                         else
                         {
                             <text>--</text>
@@ -56,14 +60,12 @@
                     <td>@product.Price</td>
 
                     <td>
-                        @*<a class="btn btn-primary" href="@Url.Action("Edit", "Products", new { id = product.Id})">Edit</a>
-                        <a class="btn btn-danger" href="@Url.Action("Delete", "Products", new { id = product.Id})">Delete</a>*@
-                        <button class="btnEdit" type="button" data-id ="@product.Id">Edit</button>
-                        <button class="btnDelete" type="button" data-id ="@product.Id">Delete</button>
-                        <button class="addToCart" type="button" data-id ="@product.Id">Add to Cart</button>
+                        <button class="btnEdit" type="button" data-id="@product.Id">Edit</button>
+                        <button class="btnDelete" type="button" data-id="@product.Id">Delete</button>
+                        <button class="addToCart" type="button" data-id="@product.Id">Add to Cart</button>
                     </td>
-                </tr>            
-             }
+                </tr>
+            }
         </tbody>
     </table>
 </div>
@@ -86,7 +88,6 @@
         });
     });
 
-
     $("#btnNew").click(function () {
         $.ajax({
             type: 'GET',
@@ -99,7 +100,6 @@
             alert("Fail");
         });
     });
-
 
     $(".btnEdit").click(function () {
         $.ajax({
@@ -116,7 +116,6 @@
         });
     });
 
-
     $(".btnDelete").click(function () {
 
         swal({
@@ -128,7 +127,7 @@
         })
         .then((willDelete) => {
             if (willDelete) {
-                
+
 
                 $.ajax({
                 type: 'POST',
@@ -146,27 +145,21 @@
                 }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
                     alert("Failed");
                 });
-            } 
+            }
         });
 
+    });
 
-        @*var confirmDelete = confirm("Are you sure to want to delete?");
-        if (confirmDelete) {
+    var products = [];
 
-            $.ajax({
-                type: 'POST',
-                url: '@Url.Action("Delete", "Products")',
-                data: {
-                    Id : $(this).attr('data-id')
-                }
-            }).done(function (response) {
-                $("#tableContainer").html(response);
-            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-                alert("Failed");
-            });
+    $(".addToCart").click(function () {
 
-        }*@
+        var productId = $(this).attr('data-id');
 
+        products.push(productId);
+
+        $.cookie('CartProducts', products.join('-'), { path: '/' }); //accessible anywhere in the website because of setting path
+        alert("Carted");
     });
 
     function focusAction() {

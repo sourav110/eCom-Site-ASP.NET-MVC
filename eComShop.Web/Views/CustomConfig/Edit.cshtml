@@ -1,0 +1,47 @@
+﻿@model eComShop.Entities.CustomConfig
+
+@{ ViewBag.Title = "Edit"; }
+
+<hr />
+<h2 class="text-info">Edit Custom Config</h2>
+<hr />
+
+<form id="editCustomConfig">
+    <div class="form-group">
+        <label>Key</label>
+        <input name="Key" value="@Model.Key" class="form-control" />
+    </div>
+
+
+    <div class="form-group">
+        <label>Value</label>
+        <input name="Value" value="@Model.Value" class="form-control" />
+    </div>
+
+    <button id="btnUpdate" type="button" class="btn btn-success">Update</button>
+</form>
+
+
+
+<script>
+    $("#btnUpdate").click(function () {
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Edit", "CustomConfig")',
+            data: $("#editCustomConfig").serialize()
+
+        }).done(function (response) {
+            $("#tableContainer").html(response);
+            $("#actionContainer").html("");
+
+            swal("Record Updated Successfully!", {
+                icon: "success",
+            });
+
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            swal("Failed to Update!", {
+                icon: "danger",
+            });
+        });
+    });
+</script>

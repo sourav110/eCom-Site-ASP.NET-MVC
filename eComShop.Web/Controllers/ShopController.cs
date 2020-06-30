@@ -8,7 +8,7 @@ using System.Web.Mvc;
 
 namespace eComShop.Web.Controllers
 {
-    public class ShopController : Controller
+    public class ShopController : Controller 
     {
         ProductService productService = new ProductService();
         // GET: Shop

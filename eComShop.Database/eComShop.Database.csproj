@@ -67,6 +67,10 @@
     <Compile Include="Migrations\202006290514540_ftr.designer.cs">
       <DependentUpon>202006290514540_ftr.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006301030174_customConfig.cs" />
+    <Compile Include="Migrations\202006301030174_customConfig.designer.cs">
+      <DependentUpon>202006301030174_customConfig.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -93,6 +97,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006290514540_ftr.resx">
       <DependentUpon>202006290514540_ftr.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006301030174_customConfig.resx">
+      <DependentUpon>202006301030174_customConfig.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

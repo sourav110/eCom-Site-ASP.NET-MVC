@@ -17,3 +17,4 @@ D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.csp
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.imgUrladded.resources
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.upimgUrl.resources
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.ftr.resources
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.customConfig.resources

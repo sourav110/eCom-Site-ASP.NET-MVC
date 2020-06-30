@@ -1,0 +1,26 @@
+﻿namespace eComShop.Database.Migrations
+{
+    using System;
+    using System.Data.Entity.Migrations;
+    
+    public partial class customConfig : DbMigration
+    {
+        public override void Up()
+        {
+            CreateTable(
+                "dbo.CustomConfigs",
+                c => new
+                    {
+                        Key = c.String(nullable: false, maxLength: 128),
+                        Value = c.String(),
+                    })
+                .PrimaryKey(t => t.Key);
+            
+        }
+        
+        public override void Down()
+        {
+            DropTable("dbo.CustomConfigs");
+        }
+    }
+}

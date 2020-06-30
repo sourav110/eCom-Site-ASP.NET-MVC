@@ -1,0 +1,47 @@
+﻿@model List<eComShop.Entities.CustomConfig>
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<hr />
+<h2 class="text-info">Create Custom Config</h2>
+<hr />
+
+<form id="createCustomConfig">
+    
+    <div class="form-group">
+        <label>Key</label>
+        <input name="Key" class="form-control" />
+    </div>
+
+
+    <div class="form-group">
+        <label>Value</label>
+        <input name="Value" class="form-control" />
+    </div>
+
+    <button id="btnSave" type="button" class="btn btn-primary">Save</button>
+</form>
+
+
+<script>
+    $("#btnSave").click(function () {
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("Create", "CustomConfig")',
+            data: $("#createCustomConfig").serialize()
+
+        }).done(function (response) {
+            $("#tableContainer").html(response);
+            $("#actionContainer").html("");
+            swal("Record Saved Successfully!", {
+                icon: "success",
+            });
+
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Failed to Save");
+        });
+    });
+</script>

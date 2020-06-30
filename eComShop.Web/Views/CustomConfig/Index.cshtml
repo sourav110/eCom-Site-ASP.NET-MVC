@@ -1,14 +1,12 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
 }
 
 <div class="container">
     <div id="tableContainer">
 
-        @{ 
-            Html.RenderAction("ProductTable");
-            //Html.RenderAction("Create");
+        @{
+            Html.RenderAction("CustomConfigTable");
         }
     </div>
 
@@ -16,6 +14,3 @@
 
     </div>
 </div>
-
-
-

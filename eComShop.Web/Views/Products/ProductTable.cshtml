@@ -1,4 +1,5 @@
-﻿@model List<eComShop.Entities.Product>
+﻿@*@model List<eComShop.Entities.Product>*@
+@model eComShop.Web.ViewModels.ProductSearchViewModels
 
 @{ ViewBag.Title = "ProductTable"; }
 
@@ -43,35 +44,78 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var product in Model)
+            @if (Model.Products != null && Model.Products.Count() > 0)
             {
-                <tr>
-                    <td>@product.Name</td>
-                    <td>
-                        @if (product.Category != null)
-                        {
-                            <text>@product.Category.Name</text> }
-                        else
-                        {
-                            <text>--</text>
-                        }
-                    </td>
-                    <td>@product.Description</td>
-                    <td>@product.Price</td>
-
-                    <td>
-                        <button class="btnEdit" type="button" data-id="@product.Id">Edit</button>
-                        <button class="btnDelete" type="button" data-id="@product.Id">Delete</button>
-                        <button class="addToCart" type="button" data-id="@product.Id">Add to Cart</button>
-                    </td>
-                </tr>
+                foreach (var product in Model.Products)
+                {
+                    <tr>
+                        <td>@product.Name</td>
+                        <td>
+                            @if (product.Category != null)
+                            {
+                                <text>@product.Category.Name</text> }
+                            else
+                            {
+                                <text>--</text>
+                            }
+                         </td>
+                          <td>@product.Description</td>
+                          <td>@product.Price</td>
+                      
+                          <td>
+                              <button class="btnEdit" type="button" data-id="@product.Id">Edit</button>
+                              <button class="btnDelete" type="button" data-id="@product.Id">Delete</button>
+                              <button class="addToCart" type="button" data-id="@product.Id">Add to Cart</button>
+                          </td>
+                      </tr>
+                             }
             }
+
         </tbody>
     </table>
+    <div>
+        <button id="previousRecords" data-pageNo="">Previous</button>
+        <button id="nextRecords">Next</button>
+    </div>
 </div>
 
 
 <script>
+
+    $("#previousRecords").click(function () {
+        var searchValue = $("#searchText").val();
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("ProductTable", "Products")',
+            data: {
+                searchText: searchValue
+            }
+        }).done(function (response) {
+            $("#tableContainer").html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+
+    $("#nextRecords").click(function () {
+        var searchValue = $("#searchText").val();
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("ProductTable", "Products")',
+            data: {
+                searchText: searchValue
+            }
+        }).done(function (response) {
+            $("#tableContainer").html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+
+
+
     $("#btnSearch").click(function () {
         var searchValue = $("#searchText").val();
 

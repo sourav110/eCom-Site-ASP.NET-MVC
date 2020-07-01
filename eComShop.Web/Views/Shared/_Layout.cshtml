@@ -1,4 +1,15 @@
-﻿<!DOCTYPE html>
+﻿@using eComShop.Services
+@{ 
+    CustomConfigService customConfigService = new CustomConfigService();
+
+    var facebookUrl = customConfigService.GetCustomConfig("FacebookUrl").Value;
+    var companyAddress = customConfigService.GetCustomConfig("CompanyAddress").Value;
+    var companyContactNo = customConfigService.GetCustomConfig("CompanyContactNo").Value;
+    var companyEmail = customConfigService.GetCustomConfig("CompanyEmail").Value;
+
+}
+
+<!DOCTYPE html>
 <html>
 <head>
 
@@ -177,8 +188,9 @@
                                     </div>
                                 </div>
                             </form>
+
                             <ul class="flat-social">
-                                <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                                <li><a href="@facebookUrl"><i class="fa fa-facebook"></i></a></li>
                                 <li><a href="#"><i class="fa fa-twitter"></i></a></li>
                                 <li><a href="#"><i class="fa fa-google"></i></a></li>
                                 <li><a href="#"><i class="fa fa-behance"></i></a></li>
@@ -229,9 +241,9 @@
                                 <a href="index.html"><img src="~/Content/images/logo@2x.png" alt="image" width="107" height="24"></a>
                             </div>
                             <ul class="flat-contact">
-                                <li class="address">112 Kingdom, NA 12, New York</li>
-                                <li class="phone">+12 345 678 910</li>
-                                <li class="email">infor.deercreative@gmail.com</li>
+                                <li class="address">@companyAddress</li>
+                                <li class="phone">@companyContactNo</li>
+                                <li class="email">@companyEmail</li>
                             </ul><!-- /.flat-contact -->
                         </div><!-- /.widget -->
                     </div><!-- /.col-md-3 -->

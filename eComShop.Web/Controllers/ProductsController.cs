@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 
 namespace eComShop.Web.Controllers
 {
@@ -20,15 +21,20 @@ namespace eComShop.Web.Controllers
             return View();
         }
 
-        public ActionResult ProductTable(string searchText)
+        public ActionResult ProductTable(string searchText, int? pageNo)
         {
-            var products = productService.GetAllProducts();
+            ProductSearchViewModels model = new ProductSearchViewModels();
+            
+            model.PageNo = pageNo.HasValue ? pageNo.Value : 1;
+
+            model.Products = productService.GetAllProducts(model.PageNo);
 
             if (!string.IsNullOrEmpty(searchText))
             {
-                products = products.Where(p => p.Name != null && p.Name.ToLower().Contains(searchText.ToLower())).ToList();
+                model.SearchText = searchText;
+                model.Products = model.Products.Where(p => p.Name != null && p.Name.ToLower().Contains(searchText.ToLower())).ToList();
             }
-            return PartialView(products);
+            return PartialView(model);
         }
 
         [HttpGet]

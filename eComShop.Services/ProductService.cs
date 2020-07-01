@@ -11,14 +11,13 @@ namespace eComShop.Services
 {
     public class ProductService
     {
-        public List<Product> GetAllProducts()
+        public List<Product> GetAllProducts(int pageNo)
         {
-            //var context = new ShopDbContext();
-            //return context.Products.ToList();
+            var pageSize = 3;
 
             using (var context = new ShopDbContext())
             {
-                return context.Products.Include(x=> x.Category).ToList();
+                return context.Products.OrderBy(x=> x.Id).Skip((pageNo-1) * pageSize).Take(pageSize).Include(x=> x.Category).ToList();
             }
         }
 

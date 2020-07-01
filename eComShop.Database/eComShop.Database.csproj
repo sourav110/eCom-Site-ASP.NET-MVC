@@ -71,6 +71,10 @@
     <Compile Include="Migrations\202006301030174_customConfig.designer.cs">
       <DependentUpon>202006301030174_customConfig.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007011135008_productImage.cs" />
+    <Compile Include="Migrations\202007011135008_productImage.designer.cs">
+      <DependentUpon>202007011135008_productImage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -100,6 +104,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202006301030174_customConfig.resx">
       <DependentUpon>202006301030174_customConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007011135008_productImage.resx">
+      <DependentUpon>202007011135008_productImage.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

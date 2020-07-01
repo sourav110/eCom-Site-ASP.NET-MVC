@@ -24,11 +24,15 @@ namespace eComShop.Services
 
         public Product GetProduct(int id)
         {
-            using (var context = new ShopDbContext())
-            {
-                var product = context.Products.Find(id);
-                return product;
-            }
+            //using (var context = new ShopDbContext())
+            //{
+            //    var product = context.Products.Find(id);
+            //    return product;
+            //}
+
+            var context = new ShopDbContext();
+            var product = context.Products.Find(id);
+            return product;
         }
 
         public List<Product> GetCartProducts(List<int> ids)
@@ -56,9 +60,20 @@ namespace eComShop.Services
             using (var context = new ShopDbContext())
             {
                 context.Entry(product).State = System.Data.Entity.EntityState.Modified;
+                //context.Products.Attach(product);
                 context.SaveChanges();
             }
+
         }
+
+        //public void UpdateProduct(Product product)
+        //{
+        //    using (var context = new ShopDbContext())
+        //    {
+        //        context.Entry(product).State = System.Data.Entity.EntityState.Modified;
+        //        context.SaveChanges();
+        //    }
+        //}
 
         public void DeleteProduct(int id)
         {

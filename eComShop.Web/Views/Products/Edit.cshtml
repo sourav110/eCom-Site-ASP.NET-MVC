@@ -1,6 +1,9 @@
-﻿@model eComShop.Entities.Product
+﻿@model eComShop.Web.ViewModels.EditProductViewModel
 
-@{ ViewBag.Title = "Edit"; }
+@{ 
+    ViewBag.Title = "Edit";
+    var imageUrl = !string.IsNullOrEmpty(Model.ImageURL) ? Model.ImageURL : "/content/images/noimage.jpg";
+}
 
 <hr />
 <h2 class="text-info">Edit Product</h2>
@@ -9,20 +12,48 @@
 <form id="editProduct">
     <input name="Id" value="@Model.Id" hidden />
 
-    <div class="form-group">
-        <label>Name</label>
-        <input name="Name" value="@Model.Name" class="form-control" />
-    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Category</label>
+                <select name="CategoryId" class="form-control">
+                    <option value="0">Select Category</option>
+                    @foreach (var category in Model.AvailableCategories)
+                    {
+                        var selected = category.Id == Model.CategoryId ? "selected" : string.Empty;
+                        <option value="@category.Id" @selected>@category.Name</option> 
+                    }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Name</label>
+                <input name="Name" value="@Model.Name" class="form-control" />
+            </div>
 
 
-    <div class="form-group">
-        <label>Description</label>
-        <input name="Description" value="@Model.Description" class="form-control" />
-    </div>
+            <div class="form-group">
+                <label>Description</label>
+                <input name="Description" value="@Model.Description" class="form-control" />
+            </div>
 
-    <div class="form-group">
-        <label>Price</label>
-        <input name="Price" value="@Model.Price" class="form-control" />
+            <div class="form-group">
+                <label>Price</label>
+                <input name="Price" value="@Model.Price" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <label>Image</label>
+                <input name="ImageURL" id="imageUrl" type="hidden" value="@Model.ImageURL" />
+                <input class="form-control" name="Image" id="imageUpload" type="file" accept=".png, .jpg" />
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="thumb">
+                <img src="@imageUrl" class="img-thumbnail img-fluid" id="productImage" />
+            </div>
+        </div>
     </div>
 
     <button id="btnUpdate" type="button" class="btn btn-success">Update</button>
@@ -31,6 +62,35 @@
 
 
 <script>
+    $("#imageUpload").change(function () {
+        var element = this; //this is imageUpload
+
+        var formData = new FormData();
+
+        var totalFiles = element.files.length;
+
+        for (var i = 0; i < totalFiles; i++) {
+            var file = element.files[i];
+            formData.append("Photo", file);
+        }
+
+        $.ajax({
+            type: 'POST',
+            url: '@Url.Action("UploadImage", "Shared")',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false
+
+        }).done(function (response) {
+            if (response.Success) {
+                $("#imageUrl").val(response.ImageURL);
+                $("#productImage").attr("src", response.ImageURL);
+            }
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Failed");
+        });
+    });
     $("#btnUpdate").click(function () {
         $.ajax({
             type: 'POST',

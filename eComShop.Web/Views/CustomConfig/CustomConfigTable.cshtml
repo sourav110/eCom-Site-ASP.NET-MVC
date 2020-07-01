@@ -35,9 +35,9 @@
     <table class="table table-bordered table-striped">
         <thead class="thead-inverse">
             <tr>
-                <th>Config Name</th>
-                <th>Value</th>
-                <th>Actions</th>
+                <th class="font-weight-bold">Config Name</th>
+                <th class="font-weight-bold">Value</th>
+                <th class="font-weight-bold">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -79,7 +79,7 @@
             url: '@Url.Action("Create", "CustomConfig")',
         }).done(function (response) {
             $("#actionContainer").html(response);
-            focusAction();
+            focusAction("actionContainer");
 
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Fail");
@@ -94,7 +94,7 @@
             }
         }).done(function (response) {
             $("#actionContainer").html(response);
-            focusAction();
+            focusAction("actionContainer");
 
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Failed");
@@ -135,10 +135,5 @@
 
     });
 
-    function focusAction() {
-        $('html, body').animate({
-            scrollTop: $("#actionContainer").offset().top - 100
-        }, 1000);
-    }
 </script>
 

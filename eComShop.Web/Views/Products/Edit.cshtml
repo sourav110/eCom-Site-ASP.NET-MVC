@@ -26,6 +26,7 @@
     </div>
 
     <button id="btnUpdate" type="button" class="btn btn-success">Update</button>
+    <button id="btnCancel" type="button" class="btn btn-danger">Cancel</button>
 </form>
 
 
@@ -39,6 +40,7 @@
         }).done(function (response) {
             $("#tableContainer").html(response);
             $("#actionContainer").html("");
+            focusAction("tableContainer");
 
             swal("Product Updated Successfully!", {
                 icon: "success",
@@ -47,5 +49,10 @@
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Failed");
         });
+    });
+
+    $("#btnCancel").click(function () {
+        $("#actionContainer").html("");
+        focusAction("tableContainer");
     });
 </script>

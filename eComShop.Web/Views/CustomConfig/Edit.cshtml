@@ -19,6 +19,7 @@
     </div>
 
     <button id="btnUpdate" type="button" class="btn btn-success">Update</button>
+    <button id="btnCancel" type="button" class="btn btn-danger">Cancel</button>
 </form>
 
 
@@ -33,6 +34,7 @@
         }).done(function (response) {
             $("#tableContainer").html(response);
             $("#actionContainer").html("");
+            focusAction("tableContainer");
 
             swal("Record Updated Successfully!", {
                 icon: "success",
@@ -43,5 +45,10 @@
                 icon: "danger",
             });
         });
+    });
+
+    $("#btnCancel").click(function () {
+        $("#actionContainer").html("");
+        focusAction("tableContainer");
     });
 </script>

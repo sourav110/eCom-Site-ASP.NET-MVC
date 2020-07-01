@@ -9,7 +9,7 @@
 <hr />
 
 <form id="createCustomConfig">
-    
+
     <div class="form-group">
         <label>Key</label>
         <input name="Key" class="form-control" />
@@ -22,6 +22,7 @@
     </div>
 
     <button id="btnSave" type="button" class="btn btn-primary">Save</button>
+    <button id="btnCancel" type="button" class="btn btn-danger">Cancel</button>
 </form>
 
 
@@ -36,6 +37,8 @@
         }).done(function (response) {
             $("#tableContainer").html(response);
             $("#actionContainer").html("");
+            focusAction("tableContainer");
+
             swal("Record Saved Successfully!", {
                 icon: "success",
             });
@@ -44,4 +47,10 @@
             alert("Failed to Save");
         });
     });
+
+    $("#btnCancel").click(function () {
+        $("#actionContainer").html("");
+        focusAction("tableContainer");
+    });
+
 </script>

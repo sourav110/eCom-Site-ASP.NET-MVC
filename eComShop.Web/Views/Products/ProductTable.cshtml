@@ -25,11 +25,12 @@
     <form method="post">
         <div class="form-group">
             <div class="row">
-                <div class="col-md-9">
+                <div class="col-md-8">
                     <input id="searchText" name="SearchText" class="form-control" />
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <button type="button" id="btnSearch">Search</button>
+                    <button type="button" id="btnReset">Reset</button>
                     <button type="button" id="btnNew">New</button>
                 </div>
             </div>
@@ -44,11 +45,11 @@
     <table class="table table-bordered table-striped" id="productsTable">
         <thead class="thead-inverse">
             <tr>
-                <th>Product Name</th>
-                <th>Category</th>
-                <th>Description</th>
-                <th>Price</th>
-                <th>Actions</th>
+                <th class="font-weight-bold">Product Name</th>
+                <th class="font-weight-bold">Category</th>
+                <th class="font-weight-bold">Description</th>
+                <th class="font-weight-bold">Price</th>
+                <th class="font-weight-bold">Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -131,13 +132,29 @@
         });
     });
 
+    $("#btnReset").click(function () {
+        var searchValue = '';
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("ProductTable", "Products")',
+            data: {
+                searchText: searchValue
+            }
+        }).done(function (response) {
+            $("#tableContainer").html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });
+
     $("#btnNew").click(function () {
         $.ajax({
             type: 'GET',
             url: '@Url.Action("Create", "Products")',
         }).done(function (response) {
             $("#actionContainer").html(response);
-            focusAction();
+            focusAction("actionContainer");
 
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Fail");
@@ -152,7 +169,7 @@
             }
         }).done(function (response) {
             $("#actionContainer").html(response);
-            focusAction();
+            focusAction("actionContainer");
 
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
             alert("Failed");
@@ -209,11 +226,12 @@
         });
     });
 
-    function focusAction() {
-        $('html, body').animate({
-            scrollTop: $("#actionContainer").offset().top - 100
-        }, 1000);
-    }
+
+    //function focusAction() {
+    //    $('html, body').animate({
+    //        scrollTop: $("#actionContainer").offset().top - 100
+    //    }, 1000);
+    //}
 </script>
 
 

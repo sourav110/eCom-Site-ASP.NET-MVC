@@ -24,9 +24,26 @@ namespace eComShop.Web.Controllers
         public ActionResult ProductTable(string searchText, int? pageNo)
         {
             ProductSearchViewModels model = new ProductSearchViewModels();
-            
-            model.PageNo = pageNo.HasValue ? pageNo.Value : 1;
 
+            //model.PageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
+            
+            if (pageNo.HasValue)
+            {
+                if(pageNo.Value > 0)
+                {
+                    model.PageNo = pageNo.Value;
+                }
+                else
+                {
+                    model.PageNo = 1;
+                }
+            }
+            else
+            {
+                model.PageNo = 1;
+            }
+            
+            
             model.Products = productService.GetAllProducts(model.PageNo);
 
             if (!string.IsNullOrEmpty(searchText))

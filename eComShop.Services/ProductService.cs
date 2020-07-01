@@ -17,7 +17,8 @@ namespace eComShop.Services
 
             using (var context = new ShopDbContext())
             {
-                return context.Products.OrderBy(x=> x.Id).Skip((pageNo-1) * pageSize).Take(pageSize).Include(x=> x.Category).ToList();
+                return context.Products.Include(x=> x.Category).ToList();
+                //return context.Products.OrderBy(x=> x.Id).Skip((pageNo-1) * pageSize).Take(pageSize).Include(x=> x.Category).ToList();
             }
         }
 

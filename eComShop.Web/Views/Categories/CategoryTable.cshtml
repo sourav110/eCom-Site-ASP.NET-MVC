@@ -1,21 +1,13 @@
-﻿@*@model List<eComShop.Entities.Product>*@
-@model eComShop.Web.ViewModels.ProductSearchViewModels
+﻿@model eComShop.Web.ViewModels.CategorySearchViewModel
 
-@{ ViewBag.Title = "Products Table"; }
+@{ ViewBag.Title = "Category Table"; }
 
-<!--DataTables CSS-->
-<link type="text/css" rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
-<link href="~/Content/data-tables/datatables.min.css" rel="stylesheet" />
-
-<!--DataTables JS-->
-<script src="//cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-<script src="~/Content/data-tables/datatables.min.js"></script>
 
 <div class="row">
     <div class="col-md-12">
         <div class="title-section">
             <h2 class="title">
-                Product Table
+                Category Table
             </h2>
         </div>
     </div>
@@ -45,66 +37,51 @@
     <table class="table table-bordered table-striped" id="productsTable">
         <thead class="thead-inverse">
             <tr>
-                <th class="font-weight-bold">Product Name</th>
-                <th class="font-weight-bold">Category</th>
+                <th class="font-weight-bold">Category Name</th>
                 <th class="font-weight-bold">Description</th>
-                <th class="font-weight-bold">Price</th>
                 <th class="font-weight-bold">Actions</th>
             </tr>
         </thead>
         <tbody>
-            @if (Model.Products != null && Model.Products.Count() > 0)
+            @if (Model.Categories != null && Model.Categories.Count() > 0)
             {
-                foreach (var product in Model.Products)
+                foreach (var category in Model.Categories)
                 {
                     <tr>
-                        <td>@product.Name</td>
+                        <td>@category.Name</td>
+                        <td>@category.Description</td>
                         <td>
-                            @if (product.Category != null)
-                            {
-                                <text>@product.Category.Name</text> }
-                            else
-                            {
-                                <text>--</text>
-                            }
-                         </td>
-                          <td>@product.Description</td>
-                          <td>@product.Price</td>
-                      
-                          <td>
-                              <button class="btnEdit" type="button" data-id="@product.Id">Edit</button>
-                              <button class="btnDelete" type="button" data-id="@product.Id">Delete</button>
-                              <button class="addToCart" type="button" data-id="@product.Id">Add to Cart</button>
-                          </td>
-                    </tr>
+                            <button class="btnEdit" type="button" data-id="@category.Id">Edit</button>
+                            <button class="btnDelete" type="button" data-id="@category.Id">Delete</button>
+                        </td>
+                    </tr> 
                 }
             }
+
             else
             {
                 <tr>
-                    <td class="text-danger" colspan="5">No products found</td>
+                    <td class="text-danger" colspan="5">No category found</td>
                 </tr>
             }
 
         </tbody>
     </table>
     <div>
-        @if (Model.PageNo != 1)
-        {
-           <button class="pageButton" data-pageNo="@(Model.PageNo - 1)">Previous</button>
-        }
-        <button class="pageButton" data-pageNo="@(Model.PageNo + 1)">Next</button>
+         @if (Model.PageNo != 1)
+          {
+            <button class="pageButton" data-pageNo="@(Model.PageNo - 1)">Previous</button>
+          }
+            <button class="pageButton" data-pageNo="@(Model.PageNo + 1)">Next</button>
     </div>
 </div>
 
 
 <script>
-    //$("#productsTable").DataTable();
-
     $(".pageButton").click(function () {
         $.ajax({
             type: 'GET',
-            url: '@Url.Action("ProductTable", "Products")',
+            url: '@Url.Action("CategoryTable", "Categories")',
             data: {
                 pageNo: $(this).attr('data-pageNo')
             }
@@ -121,7 +98,7 @@
 
         $.ajax({
             type: 'GET',
-            url: '@Url.Action("ProductTable", "Products")',
+            url: '@Url.Action("CategoryTable", "Categories")',
             data: {
                 searchText: searchValue
             }
@@ -137,7 +114,7 @@
 
         $.ajax({
             type: 'GET',
-            url: '@Url.Action("ProductTable", "Products")',
+            url: '@Url.Action("CategoryTable", "Categories")',
             data: {
                 searchText: searchValue
             }
@@ -151,7 +128,7 @@
     $("#btnNew").click(function () {
         $.ajax({
             type: 'GET',
-            url: '@Url.Action("Create", "Products")',
+            url: '@Url.Action("Create", "Categories")',
         }).done(function (response) {
             $("#actionContainer").html(response);
             focusAction("actionContainer");
@@ -163,7 +140,7 @@
 
     $(".btnEdit").click(function () {
         $.ajax({
-            url: '@Url.Action("Edit", "Products")',
+            url: '@Url.Action("Edit", "Categories")',
             data: {
                 Id : $(this).attr('data-id')
             }
@@ -188,10 +165,9 @@
         .then((willDelete) => {
             if (willDelete) {
 
-
                 $.ajax({
                 type: 'POST',
-                url: '@Url.Action("Delete", "Products")',
+                url: '@Url.Action("Delete", "Categories")',
                 data: {
                     Id : $(this).attr('data-id')
                 }
@@ -210,28 +186,12 @@
 
     });
 
-    var products = [];
-
-    $(".addToCart").click(function () {
-
-        var productId = $(this).attr('data-id');
-
-        products.push(productId);
-
-        $.cookie('CartProducts', products.join('-'), { path: '/' }); //accessible anywhere in the website because of setting path
-        //alert("Carted");
-
-        swal("Product Added to Cart", {
-            icon: "success",
-        });
-    });
-
-
     //function focusAction() {
     //    $('html, body').animate({
     //        scrollTop: $("#actionContainer").offset().top - 100
     //    }, 1000);
     //}
 </script>
+
 
 

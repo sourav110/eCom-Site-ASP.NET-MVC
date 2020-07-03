@@ -1,53 +1,24 @@
-﻿@model List<eComShop.Entities.Category>
-
-@{ 
-    ViewBag.Title = "Index"; 
+﻿@{
+    ViewBag.Title = "Index";
 }
 
-    <div class="container">
-        
-        <div class="row">
-            <div class="col-md-12">
-                <div class="title-section">
-                    <h2 class="title">
-                        Index - All Catgories(<a href="@Url.Action("Create", "Categories")">Create New</a>)
-                    </h2>
-                </div>
-            </div>
-        </div>
+<div class="container">
+    <div id="tableContainer">
 
-        <table class="table table-bordered table-striped">
-            <thead class="thead-inverse">
-                <tr>
-                    <th class="font-weight-bold">Category Name</th>
-                    <th class="font-weight-bold">Description</th>
-                    <th class="font-weight-bold">Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model != null && Model.Count() > 0)
-                {
-                    foreach (var category in Model)
-                    {
-                        <tr>
-                            <td>@category.Name</td>
-                            <td>@category.Description</td>
-                            <td>
-                                <a class="btn btn-primary" href="@Url.Action("Edit", "Categories", new { id = category.Id})">Edit</a>
-                                <a class="btn btn-danger" href="@Url.Action("Delete", "Categories", new { id = category.Id})">Delete</a>
-                            </td>
-                        </tr>                
-                    }
-                }
-
-                else
-                {
-                    <tr>
-                        <td class="text-danger" colspan="3">No records found</td>
-                    </tr>
-                }
-
-            </tbody>
-        </table>
+        @{
+            Html.RenderAction("CategoryTable");
+        }
     </div>
 
+    <div id="actionContainer">
+
+    </div>
+</div>
+
+<script>
+    function focusAction(controlToFocus) {
+        $('html, body').animate({
+            scrollTop: $("#" + controlToFocus).offset().top - 100
+        }, 1000);
+    }
+</script>

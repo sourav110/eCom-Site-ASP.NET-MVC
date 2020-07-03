@@ -15,7 +15,7 @@ namespace eComShop.Web.Controllers
         public ActionResult Index()
         {
             HomeViewModel model = new HomeViewModel();
-            model.FeaturedCategories = categoryService.GetAllCategories();
+            model.FeaturedCategories = categoryService.GetCategories();
 
             return View(model);
         }

@@ -2,6 +2,7 @@
 using eComShop.Entities;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,11 +11,21 @@ namespace eComShop.Services
 {
     public class CategoryService
     {
-        public List<Category> GetAllCategories()
+        public List<Category> GetCategories()
         {
             using (var context = new ShopDbContext())
             {
                 return context.Categories.ToList();
+            }
+        }
+
+        public List<Category> GetAllCategories(int pageNo)
+        {
+            var pageSize = 3;
+
+            using (var context = new ShopDbContext())
+            {
+                return context.Categories.OrderBy(x => x.Id).Skip((pageNo - 1) * pageSize).Take(pageSize).Include(x => x.Products).ToList();
             }
         }
 

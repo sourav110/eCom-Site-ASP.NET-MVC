@@ -1,5 +1,6 @@
 ﻿using eComShop.Entities;
 using eComShop.Services;
+using eComShop.Web.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,21 +15,59 @@ namespace eComShop.Web.Controllers
         // GET: Categories
         public ActionResult Index()
         {
-            var categories = categoryService.GetAllCategories();
-            return View(categories);
+            return View();
+        }
+
+        public ActionResult CategoryTable(string searchText, int? pageNo)
+        {
+            CategorySearchViewModel model = new CategorySearchViewModel();
+
+            if (pageNo.HasValue)
+            {
+                if (pageNo.Value > 0)
+                {
+                    model.PageNo = pageNo.Value;
+                }
+                else
+                {
+                    model.PageNo = 1;
+                }
+            }
+            else
+            {
+                model.PageNo = 1;
+            }
+
+
+            model.Categories = categoryService.GetAllCategories(model.PageNo);
+
+            if (!string.IsNullOrEmpty(searchText))
+            {
+                model.SearchText = searchText;
+                model.Categories = model.Categories.Where(p => p.Name != null && p.Name.ToLower().Contains(searchText.ToLower())).ToList();
+            }
+            return PartialView(model);
         }
 
         [HttpGet]
         public ActionResult Create()
         {
-            return View();
+            NewCategoryViewModel model = new NewCategoryViewModel();
+
+            return PartialView(model);
         }
 
         [HttpPost]
-        public ActionResult Create(Category category)
+        public ActionResult Create(NewCategoryViewModel model)
         {
+            Category category = new Category();
+
+            category.Name = model.Name;
+            category.Description = model.Description;
+            category.ImageURL = model.ImageURL;
+
             categoryService.SaveCategory(category);
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryTable");
         }
 
 

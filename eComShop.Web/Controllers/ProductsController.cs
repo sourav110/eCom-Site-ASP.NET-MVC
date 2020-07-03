@@ -59,7 +59,7 @@ namespace eComShop.Web.Controllers
         {
             NewProductViewModel model = new NewProductViewModel();
 
-            model.AvailableCategories = categoryService.GetAllCategories();
+            model.AvailableCategories = categoryService.GetCategories();
             
             return PartialView(model);
             //return View();
@@ -94,7 +94,7 @@ namespace eComShop.Web.Controllers
             model.CategoryId = product.Category != null ? product.Category.Id : 0;
             model.ImageURL = product.ImageURL;
 
-            model.AvailableCategories = categoryService.GetAllCategories();
+            model.AvailableCategories = categoryService.GetCategories();
 
             return PartialView(model);
             //return View();

@@ -107,7 +107,13 @@
             });
 
         }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Failed");
+            swal({
+                title: "Warning",
+                text: "Failed to update the Record",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
         });
     });
 

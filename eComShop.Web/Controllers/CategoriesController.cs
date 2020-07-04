@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Data.Entity;
+using System.Net;
 
 namespace eComShop.Web.Controllers
 {
@@ -55,14 +56,22 @@ namespace eComShop.Web.Controllers
         [HttpPost]
         public ActionResult Create(NewCategoryViewModel model)
         {
-            Category category = new Category();
+            if (ModelState.IsValid)
+            {
+                Category category = new Category();
 
-            category.Name = model.Name;
-            category.Description = model.Description;
-            category.ImageURL = model.ImageURL;
+                category.Name = model.Name;
+                category.Description = model.Description;
+                category.ImageURL = model.ImageURL;
 
-            categoryService.SaveCategory(category);
-            return RedirectToAction("CategoryTable");
+                categoryService.SaveCategory(category);
+                return RedirectToAction("CategoryTable");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(500);
+            }
+            
         }
 
 

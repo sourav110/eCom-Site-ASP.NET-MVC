@@ -11,13 +11,13 @@
 <form id="createCustomConfig">
 
     <div class="form-group">
-        <label>Key</label>
+        <label>Key <span class="text-danger">*</span></label>
         <input name="Key" class="form-control" />
     </div>
 
 
     <div class="form-group">
-        <label>Value</label>
+        <label>Value <span class="text-danger">*</span></label>
         <input name="Value" class="form-control" />
     </div>
 
@@ -27,25 +27,64 @@
 
 
 <script>
+    $("#createCustomConfig").validate({
+        rules: {
+            Key: {
+                required: true
+            },
+            Value: {
+                required: true
+            }
+        },
+
+        messages: {
+            Key: {
+                required: "Key is required",
+            },
+            Value: {
+                required: "Value is required"
+            }
+        }
+    })
+
+
     $("#btnSave").click(function () {
 
-        $.ajax({
+        if ($("#createCustomConfig").valid()) {
+            $.ajax({
             type: 'POST',
             url: '@Url.Action("Create", "CustomConfig")',
             data: $("#createCustomConfig").serialize()
 
-        }).done(function (response) {
-            $("#tableContainer").html(response);
-            $("#actionContainer").html("");
-            focusAction("tableContainer");
+            }).done(function (response) {
+                $("#tableContainer").html(response);
+                $("#actionContainer").html("");
+                focusAction("tableContainer");
 
-            swal("Record Saved Successfully!", {
-                icon: "success",
+                swal("Record Saved Successfully!", {
+                    icon: "success",
+                });
+
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                swal({
+                    title: "Warning(Server Side)",
+                    text: "Please enter all required fields",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
             });
+        }
 
-        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Failed to Save");
-        });
+        else {
+            swal({
+                title: "JS-Warning(Client Side)",
+                text: "Please enter all required fields",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+        }
     });
 
     $("#btnCancel").click(function () {

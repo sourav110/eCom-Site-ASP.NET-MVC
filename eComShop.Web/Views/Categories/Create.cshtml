@@ -14,7 +14,7 @@
         <div class="col-md-8">
 
             <div class="form-group">
-                <label>Name</label>
+                <label>Name <span class="text-danger">*</span></label>
                 <input name="Name" class="form-control" />
             </div>
 
@@ -49,26 +49,69 @@
 
 
 <script>
+    $("#createCategory").validate({
+        rules: {
+            Name: {
+                required: true,
+                minlength: 3,
+                maxlength: 50,
+            },
+            Description: {
+                maxlength: 500
+            }
+        },
+
+        messages: {
+            Name: {
+                required: "Name is required",
+                minlength: "Minimum 3 charachters required",
+                maxlength: "Maximum 50 charachters allowed",
+            },
+            Description: {
+                maxlength: "Maximum 500 charachters allowed"
+            }
+        }
+    })
+
     $("#btnSave").click(function () {
 
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("Create", "Categories")',
-            data: $("#createCategory").serialize()
+        if ($("#createCategory").valid()) {
 
-        }).done(function (response) {
-            $("#tableContainer").html(response);
-            $("#actionContainer").html("");
-            focusAction("tableContainer");
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Create", "Categories")',
+                data: $("#createCategory").serialize()
 
-            swal("Category Saved Successfully!", {
-                icon: "success",
+            }).done(function (response) {
+                $("#tableContainer").html(response);
+                $("#actionContainer").html("");
+                focusAction("tableContainer");
+
+                swal("Category Saved Successfully!", {
+                    icon: "success",
+                });
+
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                swal({
+                    title: "Warning(Server Side)",
+                    text: "Please enter all required fields",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
             });
-
-        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Failed");
-        });
+        }
+        else {
+            swal({
+                title: "JS-Warning(Client Side)",
+                text: "Please enter all required fields",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+        }
     });
+
 
     $("#btnCancel").click(function () {
         $("#actionContainer").html("");

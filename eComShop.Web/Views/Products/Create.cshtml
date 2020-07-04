@@ -24,7 +24,7 @@
             </div>
 
             <div class="form-group">
-                <label>Name</label>
+                <label>Name <span class="text-danger">*</span></label>
                 <input name="Name" class="form-control" />
             </div>
 
@@ -34,7 +34,7 @@
             </div>
 
             <div class="form-group">
-                <label>Price</label>
+                <label>Price <span class="text-danger">*</span></label>
                 <input name="Price" class="form-control" />
             </div>
 
@@ -57,25 +57,74 @@
 
 
 <script>
+    $("#createProduct").validate({
+        rules: {
+            Name: {
+                required: true,
+                minlength: 3,
+                maxlength: 50,
+            },
+            Description: {
+                maxlength: 500
+            },
+            Price: {
+                required: true
+            }
+        },
+
+        messages: {
+            Name: {
+                required: "Name is required",
+                minlength: "Minimum 3 charachters required",
+                maxlength: "Maximum 50 charachters allowed",
+            },
+            Description: {
+                maxlength: "Maximum 500 charachters allowed"
+            },
+            Price: {
+                required: "Price is required"
+            }
+        }
+    })
+
+
     $("#btnSave").click(function () {
 
-        $.ajax({
-            type: 'POST',
-            url: '@Url.Action("Create", "Products")',
-            data: $("#createProduct").serialize()
+        if ($("#createProduct").valid()) {
+            $.ajax({
+                type: 'POST',
+                url: '@Url.Action("Create", "Products")',
+                data: $("#createProduct").serialize()
 
-        }).done(function (response) {
-            $("#tableContainer").html(response);
-            $("#actionContainer").html("");
-            focusAction("tableContainer");
+            }).done(function (response) {
+                $("#tableContainer").html(response);
+                $("#actionContainer").html("");
+                focusAction("tableContainer");
 
-            swal("Product Saved Successfully!", {
-                icon: "success",
+                swal("Product Saved Successfully!", {
+                    icon: "success",
+                });
+
+            }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+                swal({
+                    title: "Warning(Server Side)",
+                    text: "Please enter all required fields",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                })
             });
+        }
 
-        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
-            alert("Failed");
-        });
+        else {
+            swal({
+                title: "JS-Warning(Client Side)",
+                text: "Please enter all required fields",
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+        }
     });
 
     $("#btnCancel").click(function () {

@@ -12,6 +12,8 @@ namespace eComShop.Entities
     {
         [Key]
         public string Key { get; set; }
+
+        [Required]
         public string Value { get; set; }
     }
 }

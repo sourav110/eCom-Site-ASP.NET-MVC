@@ -68,16 +68,23 @@ namespace eComShop.Web.Controllers
         [HttpPost]
         public ActionResult Create(NewProductViewModel model)
         {
-            Product product = new Product();
+            if (ModelState.IsValid)
+            {
+                Product product = new Product();
 
-            product.Name = model.Name;
-            product.Description = model.Description;
-            product.Price = model.Price;
-            product.Category = categoryService.GetCategory(model.CategoryId);
-            product.ImageURL = model.ImageURL;
+                product.Name = model.Name;
+                product.Description = model.Description;
+                product.Price = model.Price;
+                product.Category = categoryService.GetCategory(model.CategoryId);
+                product.ImageURL = model.ImageURL;
 
-            productService.SaveProduct(product);
-            return RedirectToAction("ProductTable");
+                productService.SaveProduct(product);
+                return RedirectToAction("ProductTable");
+            }
+            else
+            {
+                return new HttpStatusCodeResult(500);
+            }
         }
 
         [HttpGet]

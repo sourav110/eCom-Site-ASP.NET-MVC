@@ -435,6 +435,7 @@
     <Content Include="Content\javascript\rev-slider.js" />
     <Content Include="Content\javascript\switcher.js" />
     <Content Include="Content\javascript\tether.min.js" />
+    <Content Include="Content\jquery-validation\jquery.validate.min.js" />
     <Content Include="Content\rev-slider\assets\coloredbg.png" />
     <Content Include="Content\rev-slider\assets\gridtile.png" />
     <Content Include="Content\rev-slider\assets\gridtile_3x3.png" />

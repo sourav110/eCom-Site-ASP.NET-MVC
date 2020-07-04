@@ -75,6 +75,14 @@
     <Compile Include="Migrations\202007011135008_productImage.designer.cs">
       <DependentUpon>202007011135008_productImage.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007041032229_validation.cs" />
+    <Compile Include="Migrations\202007041032229_validation.designer.cs">
+      <DependentUpon>202007041032229_validation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007041102487_valid.cs" />
+    <Compile Include="Migrations\202007041102487_valid.designer.cs">
+      <DependentUpon>202007041102487_valid.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -107,6 +115,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007011135008_productImage.resx">
       <DependentUpon>202007011135008_productImage.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007041032229_validation.resx">
+      <DependentUpon>202007041032229_validation.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007041102487_valid.resx">
+      <DependentUpon>202007041102487_valid.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

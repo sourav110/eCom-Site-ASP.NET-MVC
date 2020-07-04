@@ -113,7 +113,7 @@ namespace eComShop.Web.Controllers
             var existingProduct = productService.GetProduct(model.Id);
 
             existingProduct.Name = model.Name;
-            existingProduct.Description = model.Name;
+            existingProduct.Description = model.Description;
             existingProduct.Price = model.Price;
             existingProduct.Category = categoryService.GetCategory(model.CategoryId);
             //existingProduct.CategoryId = model.CategoryId;

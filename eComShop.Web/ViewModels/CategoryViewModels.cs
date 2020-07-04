@@ -21,5 +21,7 @@ namespace eComShop.Web.ViewModels
         public int PageNo { get; set; }
         public List<Category> Categories { get; set; }
         public string SearchText { get; set; }
+
+        public Pager Pager { get; set; }
     }
 }

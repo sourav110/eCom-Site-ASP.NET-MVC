@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Data.Entity;
 
 namespace eComShop.Web.Controllers
 {
@@ -21,32 +22,26 @@ namespace eComShop.Web.Controllers
         public ActionResult CategoryTable(string searchText, int? pageNo)
         {
             CategorySearchViewModel model = new CategorySearchViewModel();
+            
+            model.SearchText = searchText;
 
-            if (pageNo.HasValue)
+            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
+
+            var totalRecords = categoryService.GetCategoriesCount(searchText);
+
+            model.Categories = categoryService.GetAllCategories(searchText, pageNo.Value);
+
+            if(model.Categories != null)
             {
-                if (pageNo.Value > 0)
-                {
-                    model.PageNo = pageNo.Value;
-                }
-                else
-                {
-                    model.PageNo = 1;
-                }
+                model.Pager = new Pager(totalRecords, pageNo, 3);
+
+                return PartialView(model);
             }
             else
             {
-                model.PageNo = 1;
+                return HttpNotFound();
             }
-
-
-            model.Categories = categoryService.GetAllCategories(model.PageNo);
-
-            if (!string.IsNullOrEmpty(searchText))
-            {
-                model.SearchText = searchText;
-                model.Categories = model.Categories.Where(p => p.Name != null && p.Name.ToLower().Contains(searchText.ToLower())).ToList();
-            }
-            return PartialView(model);
+            
         }
 
         [HttpGet]
@@ -75,14 +70,14 @@ namespace eComShop.Web.Controllers
         public ActionResult Edit(int id)
         {
             var category = categoryService.GetCategory(id);
-            return View(category);
+            return PartialView(category);
         }
 
         [HttpPost]
         public ActionResult Edit(Category category)
         {
             categoryService.UpdateCategory(category);
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryTable");
         }
 
         [HttpGet]
@@ -98,7 +93,7 @@ namespace eComShop.Web.Controllers
             //category = categoryService.GetCategory(category.Id);
 
             categoryService.DeleteCategory(category.Id);
-            return RedirectToAction("Index");
+            return RedirectToAction("CategoryTable");
         }
     }
 }

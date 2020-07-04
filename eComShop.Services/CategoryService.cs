@@ -19,13 +19,49 @@ namespace eComShop.Services
             }
         }
 
-        public List<Category> GetAllCategories(int pageNo)
+        public int GetCategoriesCount(string searchText)
         {
-            var pageSize = 3;
+            using (var context = new ShopDbContext())
+            {
+                if (!string.IsNullOrEmpty(searchText))
+                {
+                    return context.Categories.Where(c => c.Name != null && c.Name.ToLower()
+                        .Contains(searchText.ToLower())).Count();
+                }
+                else
+                {
+                    return context.Categories.Count();
+                }
+            }
+        }
+
+        public List<Category> GetAllCategories(string searchText, int pageNo)
+        {
+            CustomConfigService customConfigService = new CustomConfigService();
+
+            var pageSize = 3; //int.Parse(customConfigService.GetCustomConfig("ListingPageSize").Value);
 
             using (var context = new ShopDbContext())
             {
-                return context.Categories.OrderBy(x => x.Id).Skip((pageNo - 1) * pageSize).Take(pageSize).Include(x => x.Products).ToList();
+                if (!string.IsNullOrEmpty(searchText))
+                {
+                    return context.Categories.Where(c => c.Name != null && c.Name.ToLower()
+                        .Contains(searchText.ToLower()))
+                        .OrderBy(x => x.Id)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .Include(x => x.Products)
+                        .ToList();
+                }
+                else
+                {
+                    return context.Categories
+                        .OrderBy(x => x.Id)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .Include(x => x.Products)
+                        .ToList();
+                }
             }
         }
 

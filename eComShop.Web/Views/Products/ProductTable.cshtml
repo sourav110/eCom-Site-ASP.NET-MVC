@@ -219,7 +219,6 @@
         products.push(productId);
 
         $.cookie('CartProducts', products.join('-'), { path: '/' }); //accessible anywhere in the website because of setting path
-        //alert("Carted");
 
         swal("Product Added to Cart", {
             icon: "success",

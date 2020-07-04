@@ -178,6 +178,7 @@
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Controllers\SharedController.cs" />
     <Compile Include="Controllers\ShopController.cs" />
+    <Compile Include="Controllers\WidgetsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -191,6 +192,7 @@
     <Compile Include="ViewModels\ProductViewModels.cs" />
     <Compile Include="ViewModels\SharedViewModels.cs" />
     <Compile Include="ViewModels\ShopViewModels.cs" />
+    <Compile Include="ViewModels\WidgetViewModels.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\data-tables\datatables.min.css" />
@@ -284,6 +286,7 @@
     <Content Include="Content\images\logo.png" />
     <Content Include="Content\images\maps\map_icon.png" />
     <Content Include="Content\images\mega-menu\1.jpg" />
+    <Content Include="Content\images\no-image-available.jpg" />
     <Content Include="Content\images\noimage.jpg" />
     <Content Include="Content\images\parallax\bg-parallax1.jpg" />
     <Content Include="Content\images\parallax\bg-parallax2.jpg" />
@@ -486,7 +489,6 @@
     <Content Include="Content\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\fonts\FontAwesome.otf" />
-    <Content Include="Content\images\.DS_Store" />
     <Content Include="Content\images\shop\.DS_Store" />
     <Content Include="Content\rev-slider\css\closedhand.123" />
     <Content Include="Content\rev-slider\css\openhand.123" />
@@ -552,6 +554,7 @@
     <Content Include="Views\CustomConfig\CustomConfigTable.cshtml" />
     <Content Include="Views\CustomConfig\Edit.cshtml" />
     <Content Include="Views\Categories\CategoryTable.cshtml" />
+    <Content Include="Views\Widgets\Products.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

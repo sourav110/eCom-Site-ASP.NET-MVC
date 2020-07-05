@@ -33,9 +33,10 @@
 
                 <li class="product-item @product.Category.Name.ToLower()">
                     <div class="product-thumb clearfix">
-                        <a href="@Url.Action("Details", "Products", new { Id = product.Id})" class="product-thumb">
+                        <a href="@Url.Action("Details", "Products", new { id = product.Id})" class="product-thumb">
                             <img src="@imageUrl" alt="image" style="height: 250px;">
                         </a>
+
                         @if (Model.IsLatest)
                         {
                             <span class="new">New</span>
@@ -44,6 +45,7 @@
                         {
                             <span class="new sale">Sale</span>
                         }
+
                     </div>
                     <div class="product-info text-center clearfix">
                         <span class="product-title">@product.Name</span>

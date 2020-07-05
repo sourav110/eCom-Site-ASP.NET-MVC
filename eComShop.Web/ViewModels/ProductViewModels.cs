@@ -14,6 +14,11 @@ namespace eComShop.Web.ViewModels
         public string SearchText { get; set; }
     }
 
+    public class ProductDetailsViewModel
+    {
+        public Product Product { get; set; }
+    }
+
     public class NewProductViewModel
     {
         [Required]

@@ -139,6 +139,16 @@ namespace eComShop.Web.Controllers
         //    return RedirectToAction("ProductTable");
         //}
 
+        [HttpGet]
+        public ActionResult Details(int id)
+        {
+            ProductDetailsViewModel model = new ProductDetailsViewModel();
+
+            model.Product = productService.GetProduct(id);
+
+            return View(model);
+        }
+
         [HttpPost]
         public ActionResult Delete(int id)
         {

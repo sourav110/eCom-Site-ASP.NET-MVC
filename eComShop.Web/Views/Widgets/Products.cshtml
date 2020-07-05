@@ -21,7 +21,7 @@
             }
   
         </ul>
-        
+
         <div class="divider h54"></div>
     }
 
@@ -33,7 +33,7 @@
 
                 <li class="product-item @product.Category.Name.ToLower()">
                     <div class="product-thumb clearfix">
-                        <a href="#" class="product-thumb">
+                        <a href="@Url.Action("Details", "Products", new { Id = product.Id})" class="product-thumb">
                             <img src="@imageUrl" alt="image" style="height: 250px;">
                         </a>
                         @if (Model.IsLatest)

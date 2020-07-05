@@ -555,6 +555,7 @@
     <Content Include="Views\CustomConfig\Edit.cshtml" />
     <Content Include="Views\Categories\CategoryTable.cshtml" />
     <Content Include="Views\Widgets\Products.cshtml" />
+    <Content Include="Views\Products\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

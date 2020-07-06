@@ -19,4 +19,9 @@ namespace eComShop.Web.ViewModels
         public int MaximumPrice { get; set; }
         public int? SortBy { get; set; }
     }
+
+    public class FilteredProductsViewModel
+    {
+        public List<Product> Products { get; set; }
+    }
 }

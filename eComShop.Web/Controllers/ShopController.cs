@@ -25,6 +25,15 @@ namespace eComShop.Web.Controllers
             return View(model);
         }
 
+        public ActionResult FilteredProducts(string searchTerm, int? minPrice, int? maxPrice, int? categoryId, int? sortBy)
+        {
+            FilteredProductsViewModel model = new FilteredProductsViewModel();
+
+            model.Products = productService.SearchProducts(searchTerm, minPrice, maxPrice, categoryId, sortBy);
+
+            return PartialView(model);
+        }
+
         public ActionResult CheckOut()
         {
             CheckoutViewModel model = new CheckoutViewModel();

@@ -6,6 +6,7 @@
 
 @if (Model != null && Model.Products != null)
 {
+    <!--Best Sale Products Widget-->
     if (!Model.IsLatest)
     {
         <ul class="flat-filter style-1 text-center max-width-682 clearfix">
@@ -19,12 +20,14 @@
                     <li><a href="#" data-filter=".@category.Name.ToLower()">For @category.Name</a></li>
                 }
             }
-  
+
         </ul>
 
         <div class="divider h54"></div>
     }
 
+
+    <!--New Products Widget-->
     <div class="product-content product-fourcolumn clearfix">
         <ul class="product style2 isotope-product clearfix">
             @foreach (var product in Model.Products)

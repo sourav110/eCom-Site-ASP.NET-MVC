@@ -10,5 +10,6 @@ namespace eComShop.Web.ViewModels
     {
         public List<Product> Products { get; set; }
         public bool IsLatest { get; set; }
+        public int? CategoryId { get; set; }
     }
 }

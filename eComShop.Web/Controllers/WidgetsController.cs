@@ -14,7 +14,7 @@ namespace eComShop.Web.Controllers
 
         WidgetService widgetService = new WidgetService();
 
-        public ActionResult Products(bool isLatest)
+        public ActionResult Products(bool isLatest, int? categoryId = 0)
         {
             ProductsWidgetViewModel model = new ProductsWidgetViewModel();
             model.IsLatest = isLatest;
@@ -22,6 +22,11 @@ namespace eComShop.Web.Controllers
             if (isLatest)
             {
                 model.Products = widgetService.GetLatestProducts(4);
+            }
+
+            else if (categoryId.HasValue && categoryId.Value > 0)
+            {
+                model.Products = widgetService.GetProductsByCategory(categoryId.Value, 4);
             }
             else
             {

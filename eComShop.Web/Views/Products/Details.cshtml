@@ -12,18 +12,18 @@
 {
     <!-- Page title -->
     @*<div class="page-title parallax parallax1">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="page-title-heading">
-                        <h1 class="title">
-                            @Model.Product.Name
-                        </h1>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="page-title-heading">
+                            <h1 class="title">
+                                @Model.Product.Name
+                            </h1>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>*@ 
+        </div>*@
     <!--.page-title-->
 
     <section class="flat-row main-shop shop-detail">
@@ -35,10 +35,10 @@
                             @*<div class="flexslider style-1 has-relative">*@
                             <div class="style-1 has-relative" style="height:500px; width: 400px;">
                                 <ul class="slides">
-                                    <li data-thumb= "@imageUrl">
-                                        <img src= "@imageUrl" alt="Image">
+                                    <li data-thumb="@imageUrl">
+                                        <img src="@imageUrl" alt="Image">
                                         <div class="flat-icon style-1">
-                                            <a href= "@imageUrl" class="zoom-popup"><span class="fa fa-search-plus"></span></a>
+                                            <a href="@imageUrl" class="zoom-popup"><span class="fa fa-search-plus"></span></a>
                                         </div>
                                     </li>
                                 </ul>
@@ -218,5 +218,25 @@
             </div>
         </div>
     </section><!-- /.shop-detail-content -->
+
+
+    <section class="flat-row shop-related">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="title-section margin-bottom-55">
+                        <h2 class="title">Related Products</h2>
+                    </div>
+
+                    @{
+                        Html.RenderAction("Products", "Widgets", new { isLatest = false, categoryId = Model.Product.Category.Id });
+                    }
+                </div>
+            </div><!-- /.row -->
+        </div>
+    </section>
+
+
+
 }
 

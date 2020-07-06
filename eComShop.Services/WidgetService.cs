@@ -26,5 +26,13 @@ namespace eComShop.Services
                 return context.Products.OrderByDescending(x => x.Id).Skip((pageNo - 1) * pageSize).Take(pageSize).Include(x => x.Category).ToList();
             }
         }
+
+        public List<Product> GetProductsByCategory(int categoryId, int pageSize)
+        {
+            using (var context = new ShopDbContext())
+            {
+                return context.Products.Where(x=> x.Category.Id == categoryId).OrderByDescending(x => x.Id).Take(pageSize).Include(x => x.Category).ToList();
+            }
+        }
     }
 }

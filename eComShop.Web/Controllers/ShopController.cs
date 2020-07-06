@@ -11,7 +11,20 @@ namespace eComShop.Web.Controllers
     public class ShopController : Controller 
     {
         ProductService productService = new ProductService();
-        // GET: Shop
+        CategoryService categoryService = new CategoryService();
+
+        public ActionResult Index(string searchTerm, int? minPrice, int? maxPrice, int? categoryId, int? sortBy)
+        {
+            ShopViewModel model = new ShopViewModel();
+
+            model.FeaturedCategories = categoryService.GetFeaturedCategories();
+            model.MaximumPrice = productService.GetMaximumPrice();
+            model.Products = productService.SearchProducts(searchTerm, minPrice, maxPrice, categoryId, sortBy);
+            model.SortBy = sortBy;
+
+            return View(model);
+        }
+
         public ActionResult CheckOut()
         {
             CheckoutViewModel model = new CheckoutViewModel();

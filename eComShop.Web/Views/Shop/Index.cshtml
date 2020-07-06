@@ -108,8 +108,8 @@
             //type: 'GET',
             url: '@Url.Action("FilteredProducts", "Shop")',
             data: {
-                minimumPrice: priceSlider.slider("values", 0),
-                maximumPrice: priceSlider.slider("values", 1)
+                minPrice: priceSlider.slider("values", 0),
+                maxPrice: priceSlider.slider("values", 1)
             }
         }).done(function (response) {
             $("#productsDiv").html(response);

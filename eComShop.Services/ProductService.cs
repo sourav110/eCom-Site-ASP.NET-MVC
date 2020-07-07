@@ -21,7 +21,7 @@ namespace eComShop.Services
         }
 
 
-        public List<Product> SearchProducts(string searchTerm, int? minPrice, int? maxPrice, int? categoryId, int? sortBy)
+        public List<Product> SearchProducts(string searchTerm, int? minPrice, int? maxPrice, int? categoryId, int? sortBy, int pageNo, int pageSize)
         {
             using (var context = new ShopDbContext())
             {
@@ -69,8 +69,60 @@ namespace eComShop.Services
                     }
                 }
 
+                return products.Skip((pageNo -1) * pageSize).Take(pageSize).ToList();
+            }
+        }
 
-                return products;
+        public int SearchProductsCount(string searchTerm, int? minPrice, int? maxPrice, int? categoryId, int? sortBy)
+        {
+            using (var context = new ShopDbContext())
+            {
+                var products = context.Products.ToList();
+
+                if (categoryId.HasValue)
+                {
+                    products = products.Where(x => x.Category.Id == categoryId).ToList();
+                }
+
+                if (!string.IsNullOrEmpty(searchTerm))
+                {
+                    products = products.Where(x => x.Name.ToLower().Contains(searchTerm.ToLower())).ToList();
+                }
+
+                if (minPrice.HasValue)
+                {
+                    products = products.Where(x => x.Price >= minPrice.Value).ToList();
+                }
+
+                if (maxPrice.HasValue)
+                {
+                    products = products.Where(x => x.Price <= maxPrice.Value).ToList();
+                }
+
+                if (sortBy.HasValue)
+                {
+                    switch (sortBy.Value)
+                    {
+                        case 2:
+                            products = products.OrderByDescending(x => x.Id).ToList();
+                            break;
+
+                        case 3:
+                            products = products.OrderBy(x => x.Price).ToList();
+                            break;
+
+                        case 4:
+                            products = products.OrderByDescending(x => x.Price).ToList();
+                            break;
+
+                        default:
+                            products = products.OrderByDescending(x => x.Id).ToList();
+                            break;
+                    }
+                }
+
+
+                return products.Count();
             }
         }
 

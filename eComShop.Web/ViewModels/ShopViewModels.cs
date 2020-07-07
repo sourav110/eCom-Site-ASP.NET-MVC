@@ -18,10 +18,14 @@ namespace eComShop.Web.ViewModels
         public List<Category> FeaturedCategories { get; set; }
         public int MaximumPrice { get; set; }
         public int? SortBy { get; set; }
+        public int? CategoryId { get; set; }
+
+        public Pager Pager { get; set; }
     }
 
     public class FilteredProductsViewModel
     {
         public List<Product> Products { get; set; }
+        public Pager Pager { get; set; }
     }
 }

@@ -21,3 +21,4 @@ D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Mig
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.productImage.resources
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.validation.resources
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.valid.resources
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.dbup.resources

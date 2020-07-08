@@ -73,9 +73,7 @@
                                 <button type="submit" class="header-search-submit" title="Search">Search</button>
                             </form>
                         </li>
-                        <li class="box-login">
-                            <a class="icon_login" href="#"></a>
-                        </li>
+
                         <li class="box-cart nav-top-cart-wrapper">
                             <a class="icon_cart nav-cart-trigger active" href="#"><span>3</span></a>
                             <div class="nav-shop-cart">
@@ -90,6 +88,13 @@
                                 </div>
                             </div><!-- /.nav-shop-cart -->
                         </li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="box-login">
+                                <a class="icon_login" href="#">@User.Identity.Name</a>
+                            </li>
+                        }
                     </ul><!-- /.menu-extra -->
                     <div class="nav-wrap">
                         <nav id="mainnav" class="mainnav">
@@ -189,7 +194,7 @@
                     <div class="col-sm-6 col-md-3">
                         <div class="widget widget-brand">
                             <div class="logo logo-footer">
-                                <a href="index.html"><img src="~/Content/images/logo@2x.png" alt="image" width="107" height="24"></a>
+                                <a href="@Url.Action("Index", "Home")"><img src="~/Content/images/logo@2x.png" alt="image" width="107" height="24"></a>
                             </div>
                             <ul class="flat-contact">
                                 <li class="address">@companyAddress</li>

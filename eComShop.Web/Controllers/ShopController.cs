@@ -21,28 +21,31 @@ namespace eComShop.Web.Controllers
 
             model.FeaturedCategories = categoryService.GetFeaturedCategories();
             model.MaximumPrice = productService.GetMaximumPrice();
+            
+            var totalCount = productService.SearchProductsCount(searchTerm, minPrice, maxPrice, categoryId, sortBy);
             model.Products = productService.SearchProducts(searchTerm, minPrice, maxPrice, categoryId, sortBy, pageNo.Value, 12);
+            
             model.SortBy = sortBy;
             model.CategoryId = categoryId;
 
-            var totalCount = productService.SearchProductsCount(searchTerm, minPrice, maxPrice, categoryId, sortBy);
-            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-            
-            model.Pager = new Pager(totalCount, pageNo);
+            model.Pager = new Pager(totalCount, pageNo, 12);
 
             return View(model);
         }
 
         public ActionResult FilteredProducts(string searchTerm, int? minPrice, int? maxPrice, int? categoryId, int? sortBy, int? pageNo)
         {
-            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-
             FilteredProductsViewModel model = new FilteredProductsViewModel();
             
-            var totalCount = productService.SearchProductsCount(searchTerm, minPrice, maxPrice, categoryId, sortBy);
+            pageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
 
-            model.Pager = new Pager(totalCount, pageNo);
+            var totalCount = productService.SearchProductsCount(searchTerm, minPrice, maxPrice, categoryId, sortBy);
             model.Products = productService.SearchProducts(searchTerm, minPrice, maxPrice, categoryId, sortBy, pageNo.Value, 12);
+
+            model.SortBy = sortBy;
+            model.CategoryId = categoryId;
+
+            model.Pager = new Pager(totalCount, pageNo, 12);
 
             return PartialView(model);
         }

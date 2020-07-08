@@ -87,6 +87,10 @@
     <Compile Include="Migrations\202007080335429_dbup.designer.cs">
       <DependentUpon>202007080335429_dbup.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007081858233_catFk.cs" />
+    <Compile Include="Migrations\202007081858233_catFk.designer.cs">
+      <DependentUpon>202007081858233_catFk.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -128,6 +132,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007080335429_dbup.resx">
       <DependentUpon>202007080335429_dbup.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007081858233_catFk.resx">
+      <DependentUpon>202007081858233_catFk.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

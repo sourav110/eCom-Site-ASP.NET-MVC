@@ -26,6 +26,9 @@ namespace eComShop.Web.ViewModels
     public class FilteredProductsViewModel
     {
         public List<Product> Products { get; set; }
+        public int? SortBy { get; set; }
+        public int? CategoryId { get; set; }
+
         public Pager Pager { get; set; }
     }
 }

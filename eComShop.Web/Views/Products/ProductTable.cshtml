@@ -1,10 +1,9 @@
-﻿@*@model List<eComShop.Entities.Product>*@
-@model eComShop.Web.ViewModels.ProductSearchViewModels
+﻿@model eComShop.Web.ViewModels.ProductSearchViewModels
 
 @{ ViewBag.Title = "Products Table"; }
 
 <!--DataTables CSS-->
-<link type="text/css" rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css"/>
+<link type="text/css" rel="stylesheet" href="//cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" />
 <link href="~/Content/data-tables/datatables.min.css" rel="stylesheet" />
 
 <!--DataTables JS-->
@@ -40,7 +39,6 @@
 <br />
 
 
-
 <div>
     <table class="table table-bordered table-striped" id="productsTable">
         <thead class="thead-inverse">
@@ -57,27 +55,25 @@
             {
                 foreach (var product in Model.Products)
                 {
-                    <tr>
-                        <td>@product.Name</td>
-                        <td>
-                            @if (product.Category != null)
-                            {
-                                <text>@product.Category.Name</text> }
-                            else
-                            {
-                                <text>--</text>
-                            }
-                         </td>
-                          <td>@product.Description</td>
-                          <td>@product.Price</td>
-                      
-                          <td>
-                              <button class="btnEdit" type="button" data-id="@product.Id">Edit</button>
-                              <button class="btnDelete" type="button" data-id="@product.Id">Delete</button>
-                              <button class="addToCart" type="button" data-id="@product.Id">Add to Cart</button>
-                          </td>
-                    </tr>
-                }
+<tr>
+    <td>@product.Name</td>
+    <td>
+        @if (product.Category != null)
+        {
+<text>@product.Category.Name</text> }
+else
+{
+<text>--</text>}
+    </td>
+    <td>@product.Description</td>
+    <td>@product.Price</td>
+
+    <td>
+        <button class="btnEdit" type="button" data-id="@product.Id">Edit</button>
+        <button class="btnDelete" type="button" data-id="@product.Id">Delete</button>
+        <button class="addToCart" type="button" data-id="@product.Id">Add to Cart</button>
+    </td>
+</tr> }
             }
             else
             {
@@ -89,11 +85,29 @@
         </tbody>
     </table>
     <div>
-        @if (Model.PageNo != 1)
+        @if (Model.Pager != null && Model.Pager.TotalPages > 1)
         {
-           <button class="pageButton" data-pageNo="@(Model.PageNo - 1)">Previous</button>
+            if(Model.Pager.CurrentPage > 1)
+            {
+                <button class="pageButton" data-pageNo="1"><i class="fa fa-angle-double-left"></i></button>
+                <button class="pageButton" data-pageNo="@(Model.Pager.CurrentPage - 1)"><i class="fa fa-angle-left"></i></button>
+            }
+
+            for(var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+            {
+                string activeClass = Model.Pager.CurrentPage == page ? "active bg-success" : string.Empty;
+
+                <button class="@activeClass pageButton" data-pageNo="@page">@page</button>
+            }
+
+            if(Model.Pager.CurrentPage < Model.Pager.TotalPages)
+            {
+                <button class="pageButton" data-pageNo="@(Model.Pager.CurrentPage + 1)"><i class="fa fa-angle-right"></i></button>
+                <button class="pageButton" data-pageNo="@(Model.Pager.EndPage)"><i class="fa fa-angle-double-right"></i></button>
+            }
+            
         }
-        <button class="pageButton" data-pageNo="@(Model.PageNo + 1)">Next</button>
+
     </div>
 </div>
 
@@ -106,7 +120,8 @@
             type: 'GET',
             url: '@Url.Action("ProductTable", "Products")',
             data: {
-                pageNo: $(this).attr('data-pageNo')
+                pageNo: $(this).attr('data-pageNo'),
+                searchText: '@Model.SearchText'
             }
         }).done(function (response) {
             $("#tableContainer").html(response);

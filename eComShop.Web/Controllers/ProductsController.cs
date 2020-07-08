@@ -27,7 +27,8 @@ namespace eComShop.Web.Controllers
             ProductSearchViewModels model = new ProductSearchViewModels();
 
             //model.PageNo = pageNo.HasValue ? pageNo.Value > 0 ? pageNo.Value : 1 : 1;
-            
+            model.SearchText = searchText;
+
             if (pageNo.HasValue)
             {
                 if(pageNo.Value > 0)
@@ -43,16 +44,21 @@ namespace eComShop.Web.Controllers
             {
                 model.PageNo = 1;
             }
-            
-            
-            model.Products = productService.GetAllProducts(model.PageNo);
 
-            if (!string.IsNullOrEmpty(searchText))
+            var totalRecords = productService.GetProductsCount(searchText);
+
+            model.Products = productService.GetProducts(searchText, model.PageNo);
+
+            if (model.Products != null)
             {
-                model.SearchText = searchText;
-                model.Products = model.Products.Where(p => p.Name != null && p.Name.ToLower().Contains(searchText.ToLower())).ToList();
+                model.Pager = new Pager(totalRecords, pageNo, 5);
+
+                return PartialView(model);
             }
-            return PartialView(model);
+            else
+            {
+                return HttpNotFound();
+            }
         }
 
         [HttpGet]
@@ -80,6 +86,7 @@ namespace eComShop.Web.Controllers
                 product.ImageURL = model.ImageURL;
 
                 productService.SaveProduct(product);
+
                 return RedirectToAction("ProductTable");
             }
             else
@@ -116,9 +123,13 @@ namespace eComShop.Web.Controllers
             existingProduct.Name = model.Name;
             existingProduct.Description = model.Description;
             existingProduct.Price = model.Price;
-            existingProduct.Category = categoryService.GetCategory(model.CategoryId);
-            //existingProduct.CategoryId = model.CategoryId;
-            existingProduct.ImageURL = model.ImageURL;
+            existingProduct.Category = null;
+            existingProduct.CategoryId = model.CategoryId;
+
+            if (!string.IsNullOrEmpty(model.ImageURL))
+            {
+                existingProduct.ImageURL = model.ImageURL;
+            }
 
             productService.UpdateProduct(existingProduct);
 

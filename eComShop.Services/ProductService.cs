@@ -20,7 +20,7 @@ namespace eComShop.Services
             }
         }
 
-
+        // Front-end Search
         public List<Product> SearchProducts(string searchTerm, int? minPrice, int? maxPrice, int? categoryId, int? sortBy, int pageNo, int pageSize)
         {
             using (var context = new ShopDbContext())
@@ -123,6 +123,53 @@ namespace eComShop.Services
 
 
                 return products.Count();
+            }
+        }
+
+        //Back-end Search
+        public List<Product> GetProducts(string searchText, int pageNo)
+        {
+            CustomConfigService customConfigService = new CustomConfigService();
+
+            var pageSize = 5; //int.Parse(customConfigService.GetCustomConfig("ListingPageSize").Value);
+
+            using (var context = new ShopDbContext())
+            {
+                if (!string.IsNullOrEmpty(searchText))
+                {
+                    return context.Products.Where(p => p.Name != null && p.Name.ToLower()
+                        .Contains(searchText.ToLower()))
+                        .OrderBy(x => x.Id)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .Include(x => x.Category)
+                        .ToList();
+                }
+                else
+                {
+                    return context.Products
+                        .OrderBy(x => x.Id)
+                        .Skip((pageNo - 1) * pageSize)
+                        .Take(pageSize)
+                        .Include(x => x.Category)
+                        .ToList();
+                }
+            }
+        }
+
+        public int GetProductsCount(string searchText)
+        {
+            using (var context = new ShopDbContext())
+            {
+                if (!string.IsNullOrEmpty(searchText))
+                {
+                    return context.Products.Where(p => p.Name != null && p.Name.ToLower()
+                        .Contains(searchText.ToLower())).Count();
+                }
+                else
+                {
+                    return context.Products.Count();
+                }
             }
         }
 

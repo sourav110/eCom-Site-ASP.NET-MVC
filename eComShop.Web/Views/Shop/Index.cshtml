@@ -70,6 +70,8 @@
                         var filteredProductsViewModel = new FilteredProductsViewModel();
                         filteredProductsViewModel.Products = Model.Products;
                         filteredProductsViewModel.Pager = Model.Pager;
+                        filteredProductsViewModel.CategoryId = Model.CategoryId;
+                        filteredProductsViewModel.SortBy = Model.SortBy;
 
                         Html.RenderPartial("FilteredProducts", filteredProductsViewModel);
                     }

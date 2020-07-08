@@ -42,7 +42,6 @@ namespace eComShop.Web.Controllers
             {
                 return HttpNotFound();
             }
-            
         }
 
         [HttpGet]
@@ -71,7 +70,6 @@ namespace eComShop.Web.Controllers
             {
                 return new HttpStatusCodeResult(500);
             }
-            
         }
 
 
@@ -99,8 +97,6 @@ namespace eComShop.Web.Controllers
         [HttpPost]
         public ActionResult Delete(Category category)
         {
-            //category = categoryService.GetCategory(category.Id);
-
             categoryService.DeleteCategory(category.Id);
             return RedirectToAction("CategoryTable");
         }

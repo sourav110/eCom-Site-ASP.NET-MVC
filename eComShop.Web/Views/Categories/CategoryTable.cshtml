@@ -13,6 +13,7 @@
     </div>
 </div>
 
+
 <div>
     <form method="post">
         <div class="form-group">
@@ -30,7 +31,6 @@
     </form>
 </div>
 <br />
-
 
 
 <div>
@@ -70,25 +70,25 @@
         </tbody>
     </table>
     <div>
-        @if (Model.Pager != null)
+        @if (Model.Pager != null && Model.Pager.TotalPages > 1)
         {
             if(Model.Pager.CurrentPage > 1)
             {
-                <button class="pageButton" data-pageNo="1">First</button>
-                <button class="pageButton" data-pageNo="@(Model.Pager.CurrentPage - 1)">Previous</button>
+                <button class="pageButton" data-pageNo="1"><i class="fa fa-angle-double-left"></i></button>
+                <button class="pageButton" data-pageNo="@(Model.Pager.CurrentPage - 1)"><i class="fa fa-angle-left"></i></button>
             }
 
             for(var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
             {
-                string activeClass = Model.Pager.CurrentPage == page ? "active bg-info" : string.Empty;
+                string activeClass = Model.Pager.CurrentPage == page ? "active bg-success" : string.Empty;
 
                 <button class="@activeClass pageButton" data-pageNo="@page">@page</button>
             }
 
             if(Model.Pager.CurrentPage < Model.Pager.TotalPages)
             {
-                <button class="pageButton" data-pageNo="@(Model.Pager.CurrentPage + 1)">Next</button>
-                <button class="pageButton" data-pageNo="@(Model.Pager.EndPage)">Last</button>
+                <button class="pageButton" data-pageNo="@(Model.Pager.CurrentPage + 1)"><i class="fa fa-angle-right"></i></button>
+                <button class="pageButton" data-pageNo="@(Model.Pager.EndPage)"><i class="fa fa-angle-double-right"></i></button>
             }
             
         }
@@ -213,6 +213,5 @@
     //    }, 1000);
     //}
 </script>
-
 
 

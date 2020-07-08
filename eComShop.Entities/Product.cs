@@ -22,7 +22,7 @@ namespace eComShop.Entities
         [Required]
         public decimal Price { get; set; }
 
-        //public int CategoryId { get; set; }
+        public int CategoryId { get; set; }
         public virtual Category Category { get; set; }
 
         public string ImageURL { get; set; }

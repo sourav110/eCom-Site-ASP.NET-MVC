@@ -104,8 +104,10 @@ namespace eComShop.Services
         {
             using (var context = new ShopDbContext())
             {
-                var category = context.Categories.Find(id);
-                //context.Entry(category).State = System.Data.Entity.EntityState.Modified;
+                //in case of foreign key
+                var category = context.Categories.Where(x => x.Id == id).Include(x => x.Products).FirstOrDefault();
+
+                context.Products.RemoveRange(category.Products); // engaged products to be deleted first
                 context.Categories.Remove(category);
                 context.SaveChanges();
             }

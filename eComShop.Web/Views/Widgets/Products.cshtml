@@ -71,7 +71,7 @@
                     </div>
                     <div class="add-to-cart text-center">
                         @*<a href="#">ADD TO CART</a>*@
-                        <button class="addToCart" type="button" data-id="@product.Id">ADD TO CART</button>
+                        <button type="button" class="productAddToCart" data-id="@product.Id">ADD TO CART</button>
                     </div>
                     <a href="#" class="like"><i class="fa fa-heart-o"></i></a>
                 </li>
@@ -83,15 +83,26 @@
 
 
 <script>
-    var products = [];
+    var products;
 
-    $(".addToCart").click(function () {
+    $(".productAddToCart").click(function () {
+
+        var existingCookieData = $.cookie('CartProducts');
+
+        if (existingCookieData != null && existingCookieData != undefined && existingCookieData != "") {
+            products = existingCookieData.split('-');
+        }
+        else {
+            products = [];
+        }
 
         var productId = $(this).attr('data-id');
 
         products.push(productId);
 
         $.cookie('CartProducts', products.join('-'), { path: '/' }); //accessible anywhere in the website because of setting path
+
+        updateCartProductsCount();
 
         swal("Product Added to Cart", {
             icon: "success",

@@ -225,7 +225,6 @@ namespace eComShop.Services
                 //context.Products.Attach(product);
                 context.SaveChanges();
             }
-
         }
 
         //public void UpdateProduct(Product product)

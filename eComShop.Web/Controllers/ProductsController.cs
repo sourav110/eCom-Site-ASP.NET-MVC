@@ -10,7 +10,7 @@ using System.Web.UI;
 
 namespace eComShop.Web.Controllers
 {
-    [Authorize]
+    //[Authorize]
     public class ProductsController : Controller
     {
         ProductService productService = new ProductService();

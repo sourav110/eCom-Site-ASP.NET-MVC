@@ -1,0 +1,124 @@
+﻿@model eComShop.Web.ViewModels.OrderViewModel
+
+@{
+    ViewBag.Title = "orders-admin";
+}
+
+<div class="container">
+    <div id="tableContainer">
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="title-section">
+                    <h2 class="title">
+                        Orders - Admin Panel
+                    </h2>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <form method="post">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <input id="searchText" name="userId" class="form-control" value="@Model.UserId" />
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" id="btnSearch" class="btn btn-success">Search</button>
+                            <a href="@Url.Action("Index", "Orders")" class="btn btn-success">Reset</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br />
+
+        <div>
+            <table class="table table-bordered table-striped" id="ordersTable">
+                <thead class="thead-inverse">
+                    <tr>
+                        <th class="font-weight-bold">User Id</th>
+                        <th class="font-weight-bold">Total Amount</th>
+                        <th class="font-weight-bold">Status</th>
+                        <th class="font-weight-bold">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @if (Model.Orders != null && Model.Orders.Count() > 0)
+                    {
+                        foreach (var order in Model.Orders)
+                        {
+                            <tr>
+                                <td>@order.UserId</td>
+                                <td>@order.TotalAmount</td>
+                                <td>@order.Status</td>
+
+                                <td>
+                                    <a class="btn btn-primary" href="@Url.Action("Details", "Orders", new { id = order.Id })">Details</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+
+                    else
+                    {
+                        <tr>
+                            <td class="text-danger" colspan="5">
+                                No orders found !
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <div>
+                @if (Model.Pager != null && Model.Pager.TotalPages > 1)
+                {
+                    if (Model.Pager.CurrentPage > 1)
+                    {
+                        <a class="btn btn-primary" href="@Url.Action("Index", "Orders", new { userId = Model.UserId, status = Model.Status, pageNo = 1 })"><i class="fa fa-angle-double-left"></i></a>
+                        <a class="btn btn-primary" href="@Url.Action("Index", "Orders", new { userId = Model.UserId, status = Model.Status, pageNo = Model.Pager.CurrentPage - 1 })"><i class="fa fa-angle-left"></i></a> }
+
+                    for (var page = Model.Pager.StartPage; page <= Model.Pager.EndPage; page++)
+                    {
+                        string activeClass = Model.Pager.CurrentPage == page ? "active bg-success" : string.Empty;
+
+                        <a class="@activeClass btn btn-primary" href="@Url.Action("Index", "Orders", new { userId = Model.UserId, status = Model.Status, pageNo = page })">@page</a>
+                    }
+
+                    if (Model.Pager.CurrentPage < Model.Pager.TotalPages)
+                    {
+                        <a class="btn btn-primary" href="@Url.Action("Index", "Orders", new { userId = Model.UserId, status = Model.Status, pageNo = Model.Pager.CurrentPage + 1 })"><i class="fa fa-angle-right"></i></a>
+                        <a class="btn btn-primary" href="@Url.Action("Index", "Orders", new { userId = Model.UserId, status = Model.Status, pageNo = Model.Pager.EndPage })"><i class="fa fa-angle-double-right"></i></a>
+                    }
+
+                }
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    @*$("#btnReset").click(function () {
+        var searchValue = '';
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("Index", "Orders")',
+            data: {
+                searchText: searchValue
+            }
+        }).done(function (response) {
+            $("#tableContainer").html(response);
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Fail");
+        });
+    });*@
+</script>
+
+
+

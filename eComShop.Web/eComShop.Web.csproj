@@ -183,6 +183,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007080347307_InitialCreate.cs" />
+    <Compile Include="Migrations\202007080347307_InitialCreate.designer.cs">
+      <DependentUpon>202007080347307_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007091728216_checkoutMode.cs" />
+    <Compile Include="Migrations\202007091728216_checkoutMode.designer.cs">
+      <DependentUpon>202007091728216_checkoutMode.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -582,6 +591,14 @@
       <Project>{052da9c2-2f96-4eb1-a8c6-30781d88f70a}</Project>
       <Name>eComShop.Services</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202007080347307_InitialCreate.resx">
+      <DependentUpon>202007080347307_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007091728216_checkoutMode.resx">
+      <DependentUpon>202007091728216_checkoutMode.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

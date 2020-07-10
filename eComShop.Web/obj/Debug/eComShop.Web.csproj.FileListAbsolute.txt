@@ -114,3 +114,6 @@ D:\Tutorials\Gul-ecom\eComShop\eComShop.Web\bin\eComShop.Services.pdb
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Web\bin\eComShop.Services.dll.config
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Web\bin\eComShop.Database.pdb
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Web\bin\eComShop.Database.dll.config
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Web\obj\Debug\eComShop.Web.Migrations.InitialCreate.resources
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Web\obj\Debug\eComShop.Web.csproj.GenerateResource.cache
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Web\obj\Debug\eComShop.Web.Migrations.checkoutMode.resources

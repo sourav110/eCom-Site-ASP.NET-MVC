@@ -23,3 +23,6 @@ D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Mig
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.valid.resources
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.dbup.resources
 D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.catFk.resources
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.order.resources
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.type.resources
+D:\Tutorials\Gul-ecom\eComShop\eComShop.Database\obj\Debug\eComShop.Database.Migrations.qty.resources

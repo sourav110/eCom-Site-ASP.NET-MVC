@@ -15,7 +15,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 
@@ -38,7 +38,7 @@
                             var productQuantity = Model.CartProductIds.Where(productId => productId == product.Id).Count();
 
                             <li class="list-group-item d-flex justify-content-between lh-condensed">
-                                
+
                                 <div class="row">
                                     <div class="col-md-3">
                                         <div class="product-thumb clearfix">
@@ -94,24 +94,52 @@
                         </div>
 
                         <hr class="mb-4">
-                        <button class="btn btn-primary btn-lg btn-block" type="submit">Continue to checkout</button>
+                        <button id="btnPlaceOrder" class="btn btn-primary btn-lg btn-block" type="button">Place Order</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
-}
 
+
+
+    <script>
+    $("#btnPlaceOrder").click(function () {
+
+        $.ajax({
+            type: 'GET',
+            url: '@Url.Action("PlaceOrder", "Shop")',
+            data: {
+                productIds: '@string.Join("-", Model.CartProductIds)'
+            }
+        }).done(function (response) {
+            if (response.Success) {
+                $.cookie('CartProducts', '', { path: '/' });
+                updateCartProductsCount();
+
+                swal("Done", "Your order has been placed", "success")
+                    .then((value) => window.location = '@Url.Action("Index", "Shop")');
+            }
+            else {
+                swal("Sorry", "Failed to place order", "warning")
+            }
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Failed");
+        });
+    });
+    </script>
+}
 
 else
 {
-<div class="container">
-    <div class="row">
-        <div class="bg-warning">
-            No products in Cart !
+    <div class="container">
+        <div class="row">
+            <div class="bg-warning">
+                No products in Cart !
+            </div>
         </div>
     </div>
-</div>
 }
+
 
 

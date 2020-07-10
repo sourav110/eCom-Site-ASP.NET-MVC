@@ -1,4 +1,5 @@
-﻿using eComShop.Services;
+﻿using eComShop.Entities;
+using eComShop.Services;
 using eComShop.Web.ViewModels;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
@@ -101,7 +102,7 @@ namespace eComShop.Web.Controllers
 
             var CartProductsCookie = Request.Cookies["CartProducts"];
 
-            if(CartProductsCookie != null)
+            if(CartProductsCookie != null && !string.IsNullOrEmpty(CartProductsCookie.Value))
             {
                 //var productIds = CartProductsCookie.Value;
                 //var ids = productIds.Split('-'); // string
@@ -114,6 +115,42 @@ namespace eComShop.Web.Controllers
                 model.User = UserManager.FindById(User.Identity.GetUserId());
             }
             return View(model);
+        }
+
+        // product id formate : 1-9-2-3
+        public JsonResult PlaceOrder(string productIds)
+        {
+            ShopService shopService = new ShopService();
+
+            JsonResult result = new JsonResult();
+            result.JsonRequestBehavior = JsonRequestBehavior.AllowGet;
+
+            if (!string.IsNullOrEmpty(productIds))
+            {
+                var productQuantities = productIds.Split('-').Select(x => int.Parse(x)).ToList();
+                var boughtProducts = productService.GetCartProducts(productQuantities.Distinct().ToList());
+
+                Order newOrder = new Order();
+
+                newOrder.UserId = User.Identity.GetUserId();
+                newOrder.OrderedAt = DateTime.Now;
+                newOrder.Status = "pending";
+                newOrder.TotalAmount = boughtProducts.Sum(x => x.Price * productQuantities.Where(productId => productId == x.Id).Count());
+
+                newOrder.OrderItems = new List<OrderItem>();
+                newOrder.OrderItems.AddRange(boughtProducts.Select(x => new OrderItem() { ProductId = x.Id, Quantity = productQuantities.Where(productId => productId == x.Id).Count() }));
+
+                var rowsAffected = shopService.SaveOrder(newOrder);
+
+                result.Data = new { Success = true, Rows = rowsAffected };
+            }
+
+            else
+            {
+                result.Data = new { Success = false };
+            }
+
+            return result;
         }
     }
 }

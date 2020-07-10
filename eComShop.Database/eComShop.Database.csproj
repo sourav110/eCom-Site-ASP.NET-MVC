@@ -91,6 +91,18 @@
     <Compile Include="Migrations\202007081858233_catFk.designer.cs">
       <DependentUpon>202007081858233_catFk.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202007100601342_order.cs" />
+    <Compile Include="Migrations\202007100601342_order.designer.cs">
+      <DependentUpon>202007100601342_order.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007100731420_type.cs" />
+    <Compile Include="Migrations\202007100731420_type.designer.cs">
+      <DependentUpon>202007100731420_type.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202007100811072_qty.cs" />
+    <Compile Include="Migrations\202007100811072_qty.designer.cs">
+      <DependentUpon>202007100811072_qty.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="ShopDbContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -135,6 +147,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202007081858233_catFk.resx">
       <DependentUpon>202007081858233_catFk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007100601342_order.resx">
+      <DependentUpon>202007100601342_order.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007100731420_type.resx">
+      <DependentUpon>202007100731420_type.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202007100811072_qty.resx">
+      <DependentUpon>202007100811072_qty.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

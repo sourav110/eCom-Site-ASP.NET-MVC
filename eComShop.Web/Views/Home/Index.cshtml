@@ -204,7 +204,7 @@
                                     <div class="thumb">
                                         <img src="@firstCategory.ImageURL" alt="Image">
                                         <div class="elm-btn">
-                                            <a href="#" class="themesflat-button bg-white width-150">@firstCategory.Name</a>
+                                            <a href="@Url.Action("Index", "Shop", new { categoryId = firstCategory.Id })" class="themesflat-button bg-white width-150">@firstCategory.Name</a>
                                         </div>
                                         <div class="overlay-effect bg-color-1"></div>
                                     </div>
@@ -222,7 +222,7 @@
                                     <div class="thumb">
                                         <img src="@thirdCategory.ImageURL" alt="Image">
                                         <div class="elm-btn">
-                                            <a href="#" class="themesflat-button bg-white width-150">@thirdCategory.Name</a>
+                                            <a href="@Url.Action("Index", "Shop", new { categoryId = thirdCategory.Id })" class="themesflat-button bg-white width-150">@thirdCategory.Name</a>
                                         </div>
                                         <div class="overlay-effect bg-color-1"></div>
                                     </div>
@@ -241,7 +241,7 @@
                                     <div class="thumb">
                                         <img src="@secondCategory.ImageURL" alt="Image">
                                         <div class="elm-btn">
-                                            <a href="#" class="themesflat-button bg-white width-150">@secondCategory.Name</a>
+                                            <a href="@Url.Action("Index", "Shop", new { categoryId = secondCategory.Id })" class="themesflat-button bg-white width-150">@secondCategory.Name</a>
                                         </div>
                                         <div class="overlay-effect bg-color-1"></div>
                                     </div>
@@ -288,7 +288,7 @@
                         <div class="sub-title"><span>Big Sale of this Week</span></div>
                     </div>
                     <div class="elm-btn text-center">
-                        <a href="#" class="themesflat-button bg-accent has-padding-36">Shop Now</a>
+                        <a href="@Url.Action("Index", "Shop")" class="themesflat-button bg-accent has-padding-36">Shop Now</a>
                     </div>
                 </div><!-- /.flat-animation-block -->
             </div>
@@ -314,66 +314,3 @@
     </div>
 </section>
 <!-- END PRODUCT -->
-
-<br />
-
-<!-- ICON BOX -->
-<section class="flat-row row-icon-box bg-section bg-color-f5f">
-    <div class="container">
-        <div class="row">
-            <div class="col-md-3">
-                <div class="flat-icon-box icon-top style-1 clearfix text-center">
-                    <div class="inner no-margin">
-                        <div class="icon-wrap">
-                            <i class="fa fa-truck"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <h5 class="heading"><a href="#">Free Shipping</a></h5>
-                            <p class="desc">Free Shipping on order over $99</p>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /.col-md-3 -->
-            <div class="col-md-3">
-                <div class="flat-icon-box icon-top style-1 clearfix text-center">
-                    <div class="inner">
-                        <div class="icon-wrap">
-                            <i class="fa fa-money"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <h5 class="heading"><a href="#">Cash On Delivery</a></h5>
-                            <p class="desc">The Internet Trend To Repeat</p>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /.col-md-3 -->
-            <div class="col-md-3">
-                <div class="flat-icon-box icon-top style-1 clearfix text-center">
-                    <div class="inner">
-                        <div class="icon-wrap">
-                            <i class="fa fa-gift"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <h5 class="heading"><a href="#">Gift For All</a></h5>
-                            <p class="desc">Receive Gift When Subscribe</p>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /.col-md-3 -->
-            <div class="col-md-3">
-                <div class="flat-icon-box icon-top style-1 clearfix text-center">
-                    <div class="inner">
-                        <div class="icon-wrap">
-                            <i class="fa fa-clock-o"></i>
-                        </div>
-                        <div class="text-wrap">
-                            <h5 class="heading"><a href="#">Opening All Week</a></h5>
-                            <p class="desc">6.00 am - 17.00pm</p>
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /.col-md-3 -->
-        </div>
-    </div>
-</section>
-<!-- END ICON BOX -->

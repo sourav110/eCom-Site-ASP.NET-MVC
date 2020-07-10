@@ -70,7 +70,7 @@
                             <td>
                                 <button class="btnEdit" type="button" data-id="@product.Id">Edit</button>
                                 <button class="btnDelete" type="button" data-id="@product.Id">Delete</button>
-                                <button class="addToCart" type="button" data-id="@product.Id">Add to Cart</button>
+                                <button class="btnDetails" type="button" data-id="@product.Id">View Details</button>
                             </td>
                         </tr> 
                         }
@@ -191,6 +191,22 @@
             alert("Failed");
         });
     });
+
+    $(".btnDetails").click(function () {
+        $.ajax({
+            url: '@Url.Action("ViewDetails", "Products")',
+            data: {
+                Id : $(this).attr('data-id')
+            }
+        }).done(function (response) {
+            $("#actionContainer").html(response);
+            focusAction("actionContainer");
+
+        }).fail(function (XMLHttpRequest, textStatus, errorThrown) {
+            alert("Failed");
+        });
+    });
+
 
     $(".btnDelete").click(function () {
 

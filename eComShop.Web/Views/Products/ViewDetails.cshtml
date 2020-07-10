@@ -1,0 +1,68 @@
+﻿@model eComShop.Web.ViewModels.ProductViewDetailsViewModel
+
+@{ ViewBag.Title = "View Details";
+    var imageUrl = !string.IsNullOrEmpty(Model.Product.ImageURL) ? Model.Product.ImageURL : "/content/images/no-image-available.jpg"; 
+}
+
+<hr />
+<h2 class="text-info">Product Details</h2>
+<hr />
+
+<form id="viewProduct">
+    <input name="Id" value="@Model.Product.Id" hidden />
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="form-group">
+                <label>Category</label>
+                <select name="CategoryId" class="form-control" disabled>
+                    <option value="0">Select Category</option>
+                    @foreach (var category in Model.AvailableCategories)
+                    {
+                        var selected = category.Id == Model.Product.CategoryId ? "selected" : string.Empty;
+                        <option value="@category.Id" @selected>@category.Name</option>
+                     }
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Name</label>
+                <input name="Name" value="@Model.Product.Name" class="form-control" readonly/>
+            </div>
+
+
+            <div class="form-group">
+                <label>Description</label>
+                <input name="Description" value="@Model.Product.Description" class="form-control" readonly/>
+            </div>
+
+            <div class="form-group">
+                <label>Price</label>
+                <input name="Price" value="@Model.Product.Price" class="form-control" readonly/>
+            </div>
+
+            <div class="form-group">
+                <label>Image</label>
+                <input name="ImageURL" id="imageUrl" type="hidden" value="@Model.Product.ImageURL" />
+                <input class="form-control" name="Image" id="imageUpload" type="file" accept=".png, .jpg" disabled/>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="thumb">
+                <img src="@imageUrl" class="img-thumbnail img-fluid" id="productImage" style="height: 455px; width: 350px;"/>
+            </div>
+        </div>
+    </div>
+    
+    <button id="btnClose" type="button" class="btn btn-danger">Close</button>
+</form>
+
+
+<script>
+    $("#btnClose").click(function () {
+        $("#actionContainer").html("");
+        focusAction("tableContainer");
+    });
+</script>
+

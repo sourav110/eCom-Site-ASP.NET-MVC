@@ -21,6 +21,12 @@ namespace eComShop.Web.ViewModels
         public Product Product { get; set; }
     }
 
+    public class ProductViewDetailsViewModel
+    {
+        public Product Product { get; set; }
+        public List<Category> AvailableCategories { get; set; }
+    }
+
     public class NewProductViewModel
     {
         [Required]

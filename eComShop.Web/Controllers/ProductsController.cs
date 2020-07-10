@@ -161,6 +161,18 @@ namespace eComShop.Web.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult ViewDetails(int id)
+        {
+            ProductViewDetailsViewModel model = new ProductViewDetailsViewModel();
+
+            model.Product = productService.GetProduct(id);
+            model.AvailableCategories = categoryService.GetCategories();
+
+            return PartialView(model);
+        }
+
+
         [HttpPost]
         public ActionResult Delete(int id)
         {

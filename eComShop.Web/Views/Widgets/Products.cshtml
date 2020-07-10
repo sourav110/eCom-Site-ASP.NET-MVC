@@ -10,14 +10,14 @@
     if (!Model.IsLatest)
     {
         <ul class="flat-filter style-1 text-center max-width-682 clearfix">
-            <li class="active"><a href="#" data-filter="*">All Product</a></li>
+            <li class="active"><a href="@Url.Action("Index", "Shop")" data-filter="*">All Product</a></li>
 
             @{
                 var uniqueCategories = Model.Products.Select(c => c.Category).ToList().Distinct();
 
                 foreach (var category in uniqueCategories)
                 {
-                    <li><a href="#" data-filter=".@category.Name.ToLower()">For @category.Name</a></li>
+                    <li><a href="@Url.Action("Index", "Shop", new { categoryId = category.Id })" data-filter=".@category.Name.ToLower()">@category.Name</a></li>
                 }
             }
 

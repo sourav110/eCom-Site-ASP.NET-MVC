@@ -65,7 +65,7 @@
                         </li>
                     </ul>
 
-                    <a href="@Url.Action("Index", "Shop")" class="btn btn-warning btn-block"><h2 class="text-center">Buy More Products</h2></a>
+                    <a href="@Url.Action("Index", "Shop")" class="btn btn-success btn-block"><h2 class="text-center">Buy More Products</h2></a>
                 </div>
 
                 <div class="col-md-5 order-md-1">
@@ -134,8 +134,11 @@ else
 {
     <div class="container">
         <div class="row">
-            <div class="bg-warning">
-                No products in Cart !
+            <div class="col-md-12">
+                <div class="alert alert-danger">
+                    No products in Cart !
+                </div>
+                <a class="btn btn-primary" href="@Url.Action("Index", "Shop")">Buy Products</a>
             </div>
         </div>
     </div>
